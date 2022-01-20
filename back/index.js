@@ -20,6 +20,6 @@ const message = "tada"
 
 app.post('/', (req, res) => {
     res.status(200).json('ok');
-    sockets.forEach((s) => s.send(message));
+    sockets.forEach((s) => s.send(req.data.message));
 });
 app.listen(portREST, () => console.log('Listening REST API on port '+portREST+'!'))
