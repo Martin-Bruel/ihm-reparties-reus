@@ -1,1 +1,6 @@
-<button elevation="2" v-on:click="submit">BUTTON</button>
+<div>
+<button elevation="2" v-on:click="submit(1)">Send message to screen 1</button>
+<button elevation="2" v-on:click="submit(2)">Send message to screen 2</button>
+<button elevation="2" v-on:click="submit(3)">Send message to screen 3</button>
+<input v-model="message" placeholder="modifiez-moi" />
+</div>
