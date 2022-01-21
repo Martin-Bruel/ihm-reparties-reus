@@ -5,8 +5,8 @@
     padding: 1rem;
     margin: 1rem;
     width: 12rem;
-    min-height: 14rem;
-    max-height: 7rem;
+    height: 15rem;
+    min-height: 15rem;
     border: 1px black solid;
     transition: all .1s ease-in-out;
     border-radius: 15px;
@@ -14,6 +14,7 @@
 
 .card:hover {
     transform: scale(1.1);
+    height: auto;
     max-height: none;
 }
 
@@ -36,6 +37,12 @@ h3.subtitle {
     font-size: .8rem;
 }
 
+img.flag {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 2px;
+}
+
 p.content {
     font-size: .8rem;
     color: gray;
@@ -51,9 +58,4 @@ p.content {
 img.picture {
     width: 4rem;
     height: 4rem;
-}
-
-img.flag {
-    width: 1rem;
-    height: 1rem;
 }
