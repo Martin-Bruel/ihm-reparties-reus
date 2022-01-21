@@ -1,4 +1,5 @@
 import axios from 'axios'
+import Card from '../Card'
 
 export default {
     data: () => ({ time: null }),
@@ -7,5 +8,8 @@ export default {
         await axios.post("http://192.168.54.136:8080",{message: "SECOND POTEAU PALLOOOOOOOIIIIIS"},{"Access-Control-Allow-Origin": "*"});
         console.log("COUCOU");
       }
-    }
+    },
+    components: {
+      Card
+    },
 }
