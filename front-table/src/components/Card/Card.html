@@ -1,4 +1,4 @@
-<div class="card">
+<div v-touch:end="holdHandlerEnd" v-touch:start="holdHandler" v-bind:class="[{ cardActive: isActive }, 'card']">
     <img class="picture" :alt="title" :src="require(`@/assets/${img}`)">
     <h1 class="title">{{ title }}</h1>
     <h3 class="subtitle"><img v-if="flag" class="flag" :src="require(`@/assets/${flag}`)">{{ subtitle }}</h3>

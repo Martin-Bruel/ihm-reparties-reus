@@ -12,13 +12,13 @@
     border-radius: 15px;
 }
 
-.card:hover {
+.cardActive {
     transform: scale(1.1);
     height: auto;
     max-height: none;
 }
 
-.card:hover p {
+.cardActive p {
     display: -webkit-box;
    -webkit-line-clamp: 20; /* number of lines to show */
            line-clamp: 20; 

@@ -8,5 +8,18 @@ export default {
     },
     content: String,
     img: String
+  },
+  data () {
+    return {
+      isActive: false
+    }
+  },
+  methods: {
+      holdHandler () {
+          this.isActive = true
+      },
+      holdHandlerEnd(){
+          this.isActive = false
+      }
   }
 }

@@ -10,7 +10,8 @@
   "dependencies": {
     "axios": "^0.25.0",
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "vue": "^2.6.11",
+    "vue2-touch-events": "^3.2.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",
