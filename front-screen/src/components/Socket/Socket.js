@@ -1,6 +1,8 @@
+import Card from "../Card";
+
 export default {
     data: () => ({ time: null }),
-    mounted: 
+    
     function(){
       let connection = new WebSocket('ws://192.168.54.136:3000/');
       connection.onmessage = (event) => {
@@ -9,5 +11,8 @@ export default {
         // update the `<h2>`.
         this.time = event.data;
       }
-    }
+    },
+    components: {
+      Card
+    },
 }
