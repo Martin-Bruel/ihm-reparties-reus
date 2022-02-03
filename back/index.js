@@ -1,37 +1,32 @@
+/* websocket server */
 const { WebSocketServer } = require('ws');
 
+const websocket = require('./websocket');
 
 const portWS = 3000;
+
 const wss = new WebSocketServer({ port: portWS }); 
-
-var screens = {};
-var table;
-
 console.log('Listening WEB SOCKET on port '+portWS+'!')
+wss.on('connection', websocket.connection);
 
-wss.on('connection', function connection(ws, req) {
-    const data = new URLSearchParams(req.url.replace('/',''));
-    if(data.get('id') == 0){
 
-        console.log('Table is connected');
-        table = ws;
-        ws.on('message', onTableMessage);
-    }
-    else{
-        console.log(`Screen ${data.get('id')} is connected`);
-        screens[data.get('id')] = ws;
-        ws.on('message', onScreenMessage);
-    }
+/* rest server */
+const express = require('express');
+const api = require('./api');
+
+const app = express();
+
+const portREST = 8080;
+
+/* prevent of cross-origin issue */
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 
-function onScreenMessage(data){
-    console.log('message recieve : ' + data);
-    const json = JSON.parse(data);
-    table.send(json.message);
-}
-
-function onTableMessage(data){
-    console.log('message recieve : ' + data);
-    const json = JSON.parse(data);
-    screens[json.id].send(json.message)
-}
+/* send json data by default */
+app.use(express.json());
+app.use('/reus-api', api);
+app.listen(portREST, () => console.log('Listening REST API on port '+portREST+'!'))
