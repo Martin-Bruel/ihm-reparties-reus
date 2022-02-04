@@ -1,3 +1,5 @@
+import Graph from "../Graph";
+
 export default {
   data: () => ({ time: null, connection: null, screenId: null, message: null }),
 
@@ -28,7 +30,10 @@ export default {
         // update your UI. Just set the `time` and Vue will automatically
         // update the `<h2>`.
         this.time = event.data;
-      };
+      }
+    },
+    components: {
+      Graph
     }
   }
-};
+}

@@ -1,5 +1,3 @@
-
-
 export default {
     data: () => ({ time: null, message: null, messages: [] }),
     methods: {
