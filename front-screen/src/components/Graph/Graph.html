@@ -1,0 +1,8 @@
+<div id="graph-container">
+    <button v-on:click="addCard">Ajouter</button>
+    <transition-group name="list" tag="p">
+    <span v-for="card in cards" v-bind:key="card" class="list-card">
+        <Card/>
+    </span>
+</transition-group>
+</div>

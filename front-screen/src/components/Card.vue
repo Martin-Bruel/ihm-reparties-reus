@@ -5,7 +5,8 @@
     width: 10rem;
     height: 10rem;
     border: solid;
-    display: block;
+    display: inline-block;
+    margin: 5px;
 }
 .active{
     background-color: red;
