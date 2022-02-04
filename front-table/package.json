@@ -8,6 +8,8 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@braks/revue-draggable": "^0.4.1",
+    "@vue/composition-api": "^1.4.5",
     "axios": "^0.25.0",
     "core-js": "^3.6.5",
     "draggable-vue-directive": "^2.1.0",

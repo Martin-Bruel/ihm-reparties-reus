@@ -13,7 +13,7 @@ Vue.use(Vue2TouchEvents)
 
 
 // Vue.use(VueNativeSock, 'ws://localhost:9090')
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 /* eslint-disable no-new */
 new Vue({
