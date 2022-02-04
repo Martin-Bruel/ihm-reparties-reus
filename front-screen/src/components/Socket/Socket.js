@@ -2,7 +2,9 @@ import Graph from "../Graph";
 
 export default {
   data: () => ({ time: null, connection: null, screenId: null, message: null }),
-
+  components: {
+    Graph
+  },
   methods: {
     sendMessage: function(message) {
       console.log(this.connection);
@@ -32,8 +34,5 @@ export default {
         this.time = event.data;
       }
     },
-    components: {
-      Graph
-    }
   }
 }
