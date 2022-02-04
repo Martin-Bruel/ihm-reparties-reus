@@ -1,4 +1,4 @@
-import Card from "../Card";
+import Graph from "../Graph";
 
 export default {
     data: () => ({ time: null }),
@@ -13,6 +13,6 @@ export default {
       }
     },
     components: {
-      Card
+      Graph
     },
 }
