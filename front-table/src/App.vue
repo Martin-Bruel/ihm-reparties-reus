@@ -3,19 +3,15 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <Socket/>
     <hr/><br>
-    <div v-draggable="draggableValue">
-      <Card title="Micheeeel Jackson" subtitle="12 ans - Salvador - Garagiste" flag="france.png" img="jackson1.jpg" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nibh sagittis, vestibulum elit vitae, venenatis justo. Duis vel leo a risus tincidunt tincidunt eu a orci. Pellentesque sagittis maximus nisi a euismod. Phasellus nec velit dui. Fusce fermentum eu leo at elementum. Phasellus vel metus luctus, tincidunt lectus sed, consequat nulla. Suspendisse gravida leo sapien, ac fermentum elit varius sit amet. Fusce ante mi, sagittis at auctor eget, tristique eu tellus. Donec elementum mi blandit tortor feugiat laoreet. Duis aliquam elit velit, at volutpat dolor hendrerit aliquam. Nulla rutrum et ipsum at consequat. Integer lorem sapien, placerat ut ex sed, porta convallis nulla. Nullam porta quis purus non consequat. " />
+    <div style="display: flex;justify-content: center;">
+      <div v-if="loading">
+        <div v-for="card in cards" :key="card.id" v-draggable  v-touch:swipe.left="swipeHandler">
+          <div v-draggable="draggableValue">
+            <Card :title="card.title" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content" />
+          </div>
+        </div>
+      </div>
     </div>
-    <div v-draggable>
-      <Card title="Carloes Jackson" subtitle="57 ans - Salvador - Jardinier" flag="france.png" img="jackson2.jpg" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nibh sagittis, vestibulum elit vitae, venenatis justo. Duis vel leo a risus tincidunt tincidunt eu a orci. Pellentesque sagittis maximus nisi a euismod. Phasellus nec velit dui. Fusce fermentum eu leo at elementum. Phasellus vel metus luctus, tincidunt lectus sed, consequat nulla. Suspendisse gravida leo sapien, ac fermentum elit varius sit amet. Fusce ante mi, sagittis at auctor eget, tristique eu tellus. Donec elementum mi blandit tortor feugiat laoreet. Duis aliquam elit velit, at volutpat dolor hendrerit aliquam. Nulla rutrum et ipsum at consequat. Integer lorem sapien, placerat ut ex sed, porta convallis nulla. Nullam porta quis purus non consequat. " />
-    </div>
-    <div v-draggable>
-      <Card title="Pablo Escrobar" subtitle="23 ans - France - Dealer" flag="france.png" img="pablo.jpg" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nibh sagittis, vestibulum elit vitae, venenatis justo. Duis vel leo a risus tincidunt tincidunt eu a orci. Pellentesque sagittis maximus nisi a euismod. Phasellus nec velit dui. Fusce fermentum eu leo at elementum. Phasellus vel metus luctus, tincidunt lectus sed, consequat nulla. Suspendisse gravida leo sapien, ac fermentum elit varius sit amet. Fusce ante mi, sagittis at auctor eget, tristique eu tellus. Donec elementum mi blandit tortor feugiat laoreet. Duis aliquam elit velit, at volutpat dolor hendrerit aliquam. Nulla rutrum et ipsum at consequat. Integer lorem sapien, placerat ut ex sed, porta convallis nulla. Nullam porta quis purus non consequat. " />
-    </div>
-    <div v-draggable>
-      <Card title="Clementine" subtitle="27 ans - France - Chiante" flag="france.png" img="clementine.jpg" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nibh sagittis, vestibulum elit vitae, venenatis justo. Duis vel leo a risus tincidunt tincidunt eu a orci. Pellentesque sagittis maximus nisi a euismod. Phasellus nec velit dui. Fusce fermentum eu leo at elementum. Phasellus vel metus luctus, tincidunt lectus sed, consequat nulla. Suspendisse gravida leo sapien, ac fermentum elit varius sit amet. Fusce ante mi, sagittis at auctor eget, tristique eu tellus. Donec elementum mi blandit tortor feugiat laoreet. Duis aliquam elit velit, at volutpat dolor hendrerit aliquam. Nulla rutrum et ipsum at consequat. Integer lorem sapien, placerat ut ex sed, porta convallis nulla. Nullam porta quis purus non consequat. " />
-    </div>
-
   </div>
 </template>
 
@@ -23,15 +19,17 @@
 import Socket from './components/Socket.vue'
 import Card from './components/Card.vue'
 import axios from 'axios'
-import { Draggable } from 'draggable-vue-directive'
 
 export default {
   data(){
     return {
       draggableValue: {
         onDragEnd: this.onDragEnd,
-        multiDrag: true
-      }
+        multiDrag: true,
+        cards: null
+      },
+      loading: false,
+      cards: null
     }
   },  
   name: 'App',
@@ -51,14 +49,8 @@ export default {
       }
     }
   },
-  data(){
-    return {
-      cards: null,
-      loading: false
-    }
-  },
   mounted () {
-    axios.get('http://localhost:8080/reus-api/cards').then(response => {
+    axios.get('http://192.168.88.136:8080/reus-api/cards').then(response => {
       this.cards = response.data
       this.loading = true
     })

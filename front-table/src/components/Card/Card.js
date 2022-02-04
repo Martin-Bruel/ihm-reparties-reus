@@ -12,7 +12,8 @@ export default {
   data () {
     return {
       windowHeight: window.innerHeight,
-      isActive: false
+      isActive: false,
+      url: "http://192.168.88.136:8080/reus-api/image/"
     }
   },
   methods: {

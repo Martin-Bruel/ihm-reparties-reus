@@ -1,5 +1,5 @@
 <div ref="centeredDiv" id="centeredDiv" v-touch:end="holdHandlerEnd" v-touch:start="holdHandler" v-touch:touchhold="openMenu" v-bind:class="[{ cardActive: isActive }, 'card']">
-    <img class="picture" :alt="title" :src="require(`@/assets/${img}`)">
+    <img class="picture" :alt="title" :src="url+img">
     <h1 class="title">{{ title }}</h1>
     <h3 class="subtitle"><img v-if="flag" class="flag" :src="url+flag">{{ subtitle }}</h3>
     <p class="content">{{ content }}</p>
