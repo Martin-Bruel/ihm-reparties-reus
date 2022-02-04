@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.25.0",
     "core-js": "^3.6.5",
+    "draggable-vue-directive": "^2.1.0",
     "vue": "^2.6.11",
     "vue2-touch-events": "^3.2.2"
   },
