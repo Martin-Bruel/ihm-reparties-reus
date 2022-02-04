@@ -11,7 +11,8 @@ export default {
   },
   data () {
     return {
-      isActive: false
+      isActive: false,
+      url: "http://172.30.156.73:8080/reus-api/image/"
     }
   },
   methods: {
