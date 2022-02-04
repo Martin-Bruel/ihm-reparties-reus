@@ -3,5 +3,6 @@
     <h1 class="title">{{ title }}</h1>
     <h3 class="subtitle"><img v-if="flag" class="flag" :src="url+flag">{{ subtitle }}</h3>
     <p class="content">{{ content }}</p>
+    <button @click="doMessage">Send</button>
 </div>
 

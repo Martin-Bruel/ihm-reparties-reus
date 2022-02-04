@@ -3,6 +3,9 @@ export default {
   props: {
     title: String,
     subtitle: String,
+    callback: {
+      type: Function,
+    },
     flag: {
       default: false,
     },
@@ -29,6 +32,14 @@ export default {
         let position = document.querySelector('#centeredDiv');
         console.log(position)
         console.log(position.getBoundingClientRect().top)
+      },
+
+      doMessage() {
+        const msg = {
+          id: 2,
+          message: "yolo",
+        };
+        this.callback(JSON.stringify(msg));
       }
   }
 }

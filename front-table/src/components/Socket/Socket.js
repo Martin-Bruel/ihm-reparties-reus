@@ -19,7 +19,7 @@ export default {
     created: function() {
       const PORT = "3000";
       const ID = "0";
-      const IP = "192.168.210.136";
+      const IP = "192.168.88.136";
   
       this.connection = new WebSocket(`ws://${IP}:${PORT}?id=${ID}`);
       this.connection.onopen = () => {
