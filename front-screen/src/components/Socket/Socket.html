@@ -1,4 +1,15 @@
 <div>
-    <h1>BONSOIR</h1>
-    <h2>{{time}}</h2>
+  <h1>Ecran {{screenId}}</h1>
+  <h2>{{time}}</h2>
+  <button v-on:click="init(1)">
+    Screen 1
+  </button>
+  <button v-on:click="init(2)">
+    Screen 2
+  </button>
+  <button v-on:click="init(3)">
+    Screen 3
+  </button>
+  <input v-model="message" placeholder="message" />
+  <button elevation="2" v-on:click="submit(0)">Send message to table</button>
 </div>

@@ -1,13 +1,34 @@
 export default {
-    data: () => ({ time: null }),
-    mounted: 
-    function(){
-      let connection = new WebSocket('ws://192.168.54.136:3000/');
-      connection.onmessage = (event) => {
+  data: () => ({ time: null, connection: null, screenId: null, message: null }),
+
+  methods: {
+    sendMessage: function(message) {
+      console.log(this.connection);
+      this.connection.send(message);
+    },
+
+    submit(id) {
+      const json = {
+        id: id,
+        message: this.message
+      };
+
+      this.connection.send(JSON.stringify(json));
+    },
+
+    init: function(ID) {
+      this.screenId = ID;
+      const PORT = "3000";
+      const IP = "192.168.210.136";
+
+      this.connection = new WebSocket(`ws://${IP}:${PORT}?id=${ID}`);
+      this.connection.onopen = () => {};
+      this.connection.onmessage = event => {
         // Vue data binding means you don't need any extra work to
         // update your UI. Just set the `time` and Vue will automatically
         // update the `<h2>`.
         this.time = event.data;
-      }
+      };
     }
-}
+  }
+};
