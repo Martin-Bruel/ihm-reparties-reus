@@ -21,7 +21,7 @@ function connection(ws, req) {
     else{
         console.log(`Screen ${id} is connected`);
         /* register screen websocket */
-        screens[id] = ws;
+        screensWS[id] = ws;
         /* define function calling on screen message */
         ws.on('message', onScreenMessage);
     }
@@ -33,7 +33,7 @@ function onScreenMessage(data){
     const json = JSON.parse(data);
     console.log(`message recieve from screen: ${json.message}`);
     /* send message to table */
-    table.send(json.message);
+    tableWS.send(json.message);
 }
 
 /* handle table message */
@@ -42,7 +42,7 @@ function onTableMessage(data){
     const json = JSON.parse(data);
     console.log(`message recieve from table: ${json.message}`);
     /* send message to the specific screen */
-    screens[json.id].send(json.message)
+    screensWS[json.id].send(json.message)
 }
 
 module.exports = {
