@@ -1,0 +1,15 @@
+.container {
+    display: flex;
+    
+}
+
+button {
+    width: 200px;
+    height: 75px;
+    margin: 10px;
+}
+
+input {
+    width: 200px;
+    margin: 10px;
+}
