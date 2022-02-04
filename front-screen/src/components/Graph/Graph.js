@@ -1,7 +1,11 @@
-import Card from "../Card";
+import Card from '../Card.vue'
+import { Draggable } from 'draggable-vue-directive'
 
 export default {
     name: 'Graph',
+    directives: {
+        Draggable,
+      },
     data () {
         return {
           cards: [1, 2]
