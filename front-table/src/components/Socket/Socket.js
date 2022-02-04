@@ -1,5 +1,5 @@
 export default {
-    data: () => ({ time: null, message: null }),
+    data: () => ({ time: null, message: null, messages: [] }),
     methods: {
       submit(id){
         const json = {
@@ -25,10 +25,12 @@ export default {
       this.connection.onopen = () => {
         
       };
-      this.connection.onmessage = () => {
+      this.connection.onmessage = (event) => {
         // Vue data binding means you don't need any extra work to
         // update your UI. Just set the `time` and Vue will automatically
         // update the `<h2>`.
+        this.messages.push(event.data);
+        //this.messages;
       };
     }
 }
