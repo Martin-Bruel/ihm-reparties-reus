@@ -11,6 +11,7 @@ export default {
   },
   data () {
     return {
+      windowHeight: window.innerHeight,
       isActive: false
     }
   },
@@ -20,6 +21,13 @@ export default {
       },
       holdHandlerEnd(){
           this.isActive = false
+      },
+      openMenu(){
+        console.log("bijour")
+        console.log(this.windowHeight)
+        let position = document.querySelector('#centeredDiv');
+        console.log(position)
+        console.log(position.getBoundingClientRect().top)
       }
   }
 }
