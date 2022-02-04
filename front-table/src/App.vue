@@ -22,6 +22,8 @@
 <script>
 import Socket from './components/Socket.vue'
 import Card from './components/Card.vue'
+import axios from 'axios'
+import { Draggable } from 'draggable-vue-directive'
 
 export default {
   data(){
@@ -48,7 +50,19 @@ export default {
         console.log("Envoyé Ecran 2")
       }
     }
-  }
+  },
+  data(){
+    return {
+      cards: null,
+      loading: false
+    }
+  },
+  mounted () {
+    axios.get('http://localhost:8080/reus-api/cards').then(response => {
+      this.cards = response.data
+      this.loading = true
+    })
+}
 }
 </script>
 

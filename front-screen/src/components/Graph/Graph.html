@@ -1,0 +1,10 @@
+<div id="graph-container">
+    <button v-on:click="addCard">Ajouter</button>
+    <transition-group name="list" tag="p">
+    <span v-for="card in cards" v-bind:key="card" class="list-card">
+        <div v-draggable>
+            <Card title="Carloes Jackson" subtitle="57 ans - Salvador - Jardinier" flag="france.png" img="jackson2.jpg" content="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nibh sagittis, vestibulum elit vitae, venenatis justo. Duis vel leo a risus tincidunt tincidunt eu a orci. Pellentesque sagittis maximus nisi a euismod. Phasellus nec velit dui. Fusce fermentum eu leo at elementum. Phasellus vel metus luctus, tincidunt lectus sed, consequat nulla. Suspendisse gravida leo sapien, ac fermentum elit varius sit amet. Fusce ante mi, sagittis at auctor eget, tristique eu tellus. Donec elementum mi blandit tortor feugiat laoreet. Duis aliquam elit velit, at volutpat dolor hendrerit aliquam. Nulla rutrum et ipsum at consequat. Integer lorem sapien, placerat ut ex sed, porta convallis nulla. Nullam porta quis purus non consequat. " />
+          </div>
+    </span>
+</transition-group>
+</div>
