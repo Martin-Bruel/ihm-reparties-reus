@@ -1,6 +1,7 @@
 export default {
     name: 'Card',
     props: {
+      nb : Number,
       title: String,
       subtitle: String,
       flag: {
