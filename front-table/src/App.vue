@@ -5,11 +5,13 @@
     <hr/><br>
     <div style="display: flex;justify-content: center;">
       <div v-if="loading">
-        <div v-for="card in cards" :key="card.id" v-draggable >
-          <div v-draggable @stop="onMove(card.id, $event)">
-            <Card :title="card.title" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content" />
+        <transition-group name="list" tag="p">
+          <div v-for="card in cards" :key="card.id" v-draggable >
+              <div v-draggable @stop="onMove(card.id, $event)">
+                <Card :title="card.title" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content" />
+              </div>
           </div>
-        </div>
+        </transition-group>
       </div>
     </div>
   </div>
@@ -47,7 +49,10 @@ export default {
     },
     sendCard(id, orientation){
       console.log(id, orientation);
-      this.connection.send({id: id, orientation: orientation})
+      console.log(this.cards)
+      this.cards = this.cards.filter(card => card.id != id);
+      console.log(this.cards)
+      this.connection.send('{"id": '+id+',"orientation": "'+orientation+'"}')
     }
   },
   
@@ -86,5 +91,17 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.list-card {
+    display: inline-block;
+  }
+
+.list-enter-active, .list-leave-active {
+    transition: all 0.8s;
+}
+
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+opacity: 0;
+transform: translateY(1000px);
 }
 </style>
