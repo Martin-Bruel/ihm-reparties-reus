@@ -6,8 +6,8 @@
     <div style="display: flex;justify-content: center;">
       <div v-if="loading">
         <div v-for="card in cards" :key="card.id" v-draggable >
-          <div v-draggable="draggableValue">
-            <Card :callback="sendMessage" :title="card.title" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content" />
+          <div v-draggable @stop="onMove(card.id, $event)">
+            <Card :title="card.title" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content" />
           </div>
         </div>
       </div>
@@ -23,10 +23,6 @@ import axios from 'axios'
 export default {
   data(){
     return {
-      draggableValue: {
-        onDragStop: this.onDragStop,
-        multiDrag: true
-      },
       cards: null,
       loading: false,
       time: null, 
@@ -40,34 +36,23 @@ export default {
     Card
   },
   methods: {
-    onDragStop: function(positionDiff, absolutePosition, event) {
-      // console.log(event.clientX)
-      // console.log(event.clientY)
-
-      if (event.clientX < 80){
+    onMove(id, event){
+      if (event.detail.event.screenY < 80){
+        this.sendCard(id, "UP")
         console.log("Envoyé Ecran 1")
-      } else if (event.clientY < 80){
+      } else if (event.detail.event.screenX < 80){
+        this.sendCard(id, "LEFT")
         console.log("Envoyé Ecran 2")
       }
     },
-
-    submit(id){
-        const json = {
-          id: id,
-          message: this.message,
-        };
-        
-        this.connection.send(JSON.stringify(json));
-      },
-
-      sendMessage: function(message) {
-        console.log(this.connection);
-        this.connection.send(message);
-      }
+    sendCard(id, orientation){
+      console.log(id, orientation);
+      this.connection.send({id: id, orientation: orientation})
+    }
   },
   
   mounted () {
-    axios.get('http://192.168.88.136:8080/reus-api/cards').then(response => {
+    axios.get('http://localhost:8080/reus-api/cards').then(response => {
       this.cards = response.data
       this.loading = true
     })
@@ -76,7 +61,7 @@ export default {
   created: function() {
     const PORT = "3000";
     const ID = "0";
-    const IP = "192.168.88.136";
+    const IP = "localhost";
 
     this.connection = new WebSocket(`ws://${IP}:${PORT}?id=${ID}`);
     this.connection.onopen = () => {

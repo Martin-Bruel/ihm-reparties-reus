@@ -16,7 +16,7 @@ export default {
     return {
       windowHeight: window.innerHeight,
       isActive: false,
-      url: "http://192.168.88.136:8080/reus-api/image/"
+      url: "http://localhost:8080/reus-api/image/"
     }
   },
   methods: {
