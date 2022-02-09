@@ -1,13 +1,12 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <Socket/>
     <hr/><br>
     <div style="display: flex;justify-content: center;">
       <div v-if="loading">
         <div v-for="card in cards" :key="card.id" v-draggable >
           <div v-draggable="draggableValue">
-            <Card :callback="sendMessage" :title="card.title" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content" />
+            <Card :callback="sendCard" :title="card.title" :id="card.id" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content" />
           </div>
         </div>
       </div>
@@ -16,7 +15,7 @@
 </template>
 
 <script>
-import Socket from './components/Socket.vue'
+
 import Card from './components/Card.vue'
 import axios from 'axios'
 
@@ -36,7 +35,6 @@ export default {
   },  
   name: 'App',
   components: {
-    Socket,
     Card
   },
   methods: {
@@ -63,11 +61,15 @@ export default {
       sendMessage: function(message) {
         console.log(this.connection);
         this.connection.send(message);
+      },
+
+      sendCard: function(card) {
+        this.connection.send(card);
       }
   },
   
   mounted () {
-    axios.get('http://192.168.88.136:8080/reus-api/cards').then(response => {
+    axios.get('http://localhost:8080/reus-api/cards').then(response => {
       this.cards = response.data
       this.loading = true
     })
@@ -76,7 +78,7 @@ export default {
   created: function() {
     const PORT = "3000";
     const ID = "0";
-    const IP = "192.168.88.136";
+    const IP = "localhost";
 
     this.connection = new WebSocket(`ws://${IP}:${PORT}?id=${ID}`);
     this.connection.onopen = () => {
