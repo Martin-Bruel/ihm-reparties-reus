@@ -5,8 +5,6 @@
     padding: 1rem;
     margin: 1rem;
     width: 12rem;
-    height: 15rem;
-    min-height: 15rem;
     border: 1px black solid;
     transition: all .1s ease-in-out;
     border-radius: 15px;
@@ -38,9 +36,9 @@ h3.subtitle {
 }
 
 img.flag {
-    width: 1rem;
+    width: 1.5rem;
     height: 1rem;
-    margin-right: 2px;
+    margin-right: 0.4rem;
 }
 
 p.content {
