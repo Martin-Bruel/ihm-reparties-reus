@@ -1,7 +1,7 @@
 import Graph from "../Graph";
 import axios from 'axios'
 export default {
-  data: () => ({ time: null, connection: null, screenId: null, message: null, cards: [] }),
+  data: () => ({ time: null, connection: null, screenId: null, message: null, cards: [], screenInitialized: false }),
   components: {
     Graph
   },
@@ -38,6 +38,8 @@ export default {
         })
         this.time = event.data;
       }
+
+      this.screenInitialized = true;
     },
   }
 }

@@ -10,11 +10,14 @@ export default {
       return {
         // cards: [this.generateCardContent()],
         cardsLinks: [],
-        lines: []
+        lines: [],
+        holdingCards: []
       }   
   },
   updated(){
     console.log(this.cards)
+    console.log(this.cardsLinks)
+    console.log(this.lines)
   },
   mounted() {
     let self = this;
@@ -27,6 +30,28 @@ export default {
     }, 50);
   },
   methods: {
+    holdCard(id, holdingCards){
+        return function() {
+          console.log(id, holdingCards)
+          if (holdingCards.length > 0){
+            //At least two cards have a longpress
+            console.log("FETCH LINKS : ")
+            // axios.get('http://localhost:8080/reus-api/card/'+1).then(response => {
+            //  console.log(response.data)
+            // })
+          }
+          holdingCards.push(id)
+        }
+      },
+      releaseCard(id, holdingCards){
+        return function() {
+          console.log("releaseCard ", id, holdingCards);
+          let index = holdingCards.indexOf(id)
+          if (index !== -1){
+            holdingCards.splice(index, 1)
+          }
+        }
+      },
       addCard () {
           this.cards.push(this.generateCardContent());
 
@@ -54,7 +79,7 @@ export default {
               // console.log("randomCardId : " + randomCardId)
   
               console.log("Start " + (this.cards.length-1).toString());     
-              let lastAddedCard = document.getElementById("card" + (this.cards.length-1).toString());
+              let lastAddedCard = document.getElementById("card" + this.cards[0].id.toString());
               // console.log(lastAddedCard);
   
               console.log("End " + randomCardId.toString());
@@ -68,6 +93,10 @@ export default {
                 let linkLabelCart = document.getElementById("link" + (this.cardsLinks.length-1).toString());
   
 
+                console.log("CENSE PUSH")
+                //this.lines.push("aaa")
+                console.log(lastAddedCard)
+                console.log(linkLabelCart)
                 this.lines.push(LeaderLine.setLine(
                   lastAddedCard,
                   linkLabelCart,
@@ -106,7 +135,8 @@ export default {
           flag: flags[Math.floor(Math.random()*flags.length)],
           img: images[Math.floor(Math.random()*images.length)],
           content : content[Math.floor(Math.random()*content.length)],
-          cardOrLink: 'card'
+          cardOrLink: 'card',
+          id : this.randomIntFromInterval(1, 200)
         }
       },
       randomIntFromInterval(min, max) { // min and max included 

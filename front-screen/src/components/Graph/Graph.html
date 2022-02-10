@@ -4,6 +4,8 @@
         <span v-for="(card, index) in cards" v-bind:key="card" class="list-card">
             <Draggable>
                 <Card 
+                    v-touch:touchhold="holdCard(card.id, holdingCards)"
+                    v-touch:end="releaseCard(card.id, holdingCards)"
                     v-bind:nb="card.id" 
                     v-bind:title="card.title" 
                     v-bind:subtitle="card.subtitle" 
