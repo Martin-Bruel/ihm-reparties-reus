@@ -15,11 +15,6 @@ export default {
         holdingCards: []
       }   
   },
-  updated(){
-    console.log(this.cards)
-    console.log(this.cardsLinks)
-    console.log(this.lines)
-  },
   mounted() {
     let self = this;
     window.setInterval(function(){
@@ -55,7 +50,7 @@ export default {
                     { 
                       startPlug: 'behind', 
                       endPlug: 'behind',
-                      color: 'red',
+                      color: 'black',
                     }
                   ));
                   lines.push(LeaderLine.setLine(
@@ -64,7 +59,7 @@ export default {
                     { 
                       startPlug: 'behind', 
                       endPlug: 'behind',
-                      color: 'red',
+                      color: 'black',
                     }
                   ));
               }, 100)

@@ -34,7 +34,10 @@ export default {
         var card = JSON.parse(event.data)
         console.log(card)
         axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/card/`+card['id']).then(response => {
-          this.cards.push(response.data)
+          let res = response.data
+          res.cardOrLink = 'card'
+          console.log(res)
+          this.cards.push(res)
         })
         this.time = event.data;
       }

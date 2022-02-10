@@ -6,7 +6,7 @@
                 <Card 
                     v-touch:touchhold="holdCard(card.id, holdingCards, cardsLinks, lines)"
                     v-touch:end="releaseCard(card.id, holdingCards)"
-                    v-bind:nb="card.id" 
+                    v-bind:id="card.id" 
                     v-bind:title="card.title" 
                     v-bind:subtitle="card.subtitle" 
                     v-bind:flag="card.flag"
@@ -19,7 +19,7 @@
     <span v-for="(card, index) in cardsLinks" v-bind:key="card" class="list-card">
         <Draggable>
             <Card 
-                v-bind:nb="index" 
+                v-bind:id="index" 
                 v-bind:title="card.title" 
                 v-bind:content="card.content"
                 v-bind:cardOrLink="card.cardOrLink" />
