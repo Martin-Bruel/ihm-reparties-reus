@@ -40,9 +40,13 @@ function onScreenMessage(data){
 function onTableMessage(data){
     /* convert message to json */
     const json = JSON.parse(data);
-    console.log(`message recieve from table: ${json.message}`);
+    console.log(`message recieve from table: ${json.orientation}`);
     /* send message to the specific screen */
-    screensWS[json.id].send(json.message)
+    if (json.orientation == "UP"){
+        screensWS[1].send(JSON.stringify(json))
+    } else {
+        screensWS[2].send(JSON.stringify(json))
+    }
 }
 
 module.exports = {

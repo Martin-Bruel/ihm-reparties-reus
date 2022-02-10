@@ -2,11 +2,13 @@ export default {
     name: 'Card',
     props: {
       nb : Number,
+      cardOrLink: String,
       title: String,
       subtitle: String,
-      flag: {
-        default: false,
-      },
+      flag: String,
+      // flag: {
+      //   default: false,
+      // },
       content: String,
       img: String
     },

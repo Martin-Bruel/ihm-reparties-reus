@@ -4,11 +4,13 @@
     <hr/><br>
     <div style="display: flex;justify-content: center;">
       <div v-if="loading">
-        <div v-for="card in cards" :key="card.id" v-draggable >
-          <div v-draggable="draggableValue">
-            <Card :callback="sendCard" :title="card.title" :id="card.id" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content" />
+        <transition-group name="list" tag="p">
+          <div v-for="card in cards" :key="card.id" v-draggable >
+              <div v-draggable @stop="onMove(card.id, $event)">
+                <Card :title="card.title" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content" />
+              </div>
           </div>
-        </div>
+        </transition-group>
       </div>
     </div>
   </div>
@@ -22,10 +24,6 @@ import axios from 'axios'
 export default {
   data(){
     return {
-      draggableValue: {
-        onDragStop: this.onDragStop,
-        multiDrag: true
-      },
       cards: null,
       loading: false,
       time: null, 
@@ -38,34 +36,22 @@ export default {
     Card
   },
   methods: {
-    onDragStop: function(positionDiff, absolutePosition, event) {
-      // console.log(event.clientX)
-      // console.log(event.clientY)
-
-      if (event.clientX < 80){
+    onMove(id, event){
+      if (event.detail.event.screenY < 80){
+        this.sendCard(id, "UP")
         console.log("Envoyé Ecran 1")
-      } else if (event.clientY < 80){
+      } else if (event.detail.event.screenX < 80){
+        this.sendCard(id, "LEFT")
         console.log("Envoyé Ecran 2")
       }
     },
-
-    submit(id){
-        const json = {
-          id: id,
-          message: this.message,
-        };
-        
-        this.connection.send(JSON.stringify(json));
-      },
-
-      sendMessage: function(message) {
-        console.log(this.connection);
-        this.connection.send(message);
-      },
-
-      sendCard: function(card) {
-        this.connection.send(card);
-      }
+    sendCard(id, orientation){
+      console.log(id, orientation);
+      console.log(this.cards)
+      this.cards = this.cards.filter(card => card.id != id);
+      console.log(this.cards)
+      this.connection.send('{"id": '+id+',"orientation": "'+orientation+'"}')
+    }
   },
   
   mounted () {
@@ -103,5 +89,17 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.list-card {
+    display: inline-block;
+  }
+
+.list-enter-active, .list-leave-active {
+    transition: all 0.8s;
+}
+
+.list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+opacity: 0;
+transform: translateY(1000px);
 }
 </style>
