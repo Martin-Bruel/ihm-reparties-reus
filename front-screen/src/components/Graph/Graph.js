@@ -3,12 +3,18 @@ import LeaderLine from 'leader-line-vue';
 
 export default {
   name: 'Graph',
+  props : {
+    cards: null
+  },
   data () {
       return {
-        cards: [this.generateCardContent()],
+        // cards: [this.generateCardContent()],
         cardsLinks: [],
         lines: []
       }   
+  },
+  updated(){
+    console.log(this.cards)
   },
   mounted() {
     let self = this;

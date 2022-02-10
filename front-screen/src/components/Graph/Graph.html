@@ -4,7 +4,7 @@
         <span v-for="(card, index) in cards" v-bind:key="card" class="list-card">
             <Draggable>
                 <Card 
-                    v-bind:nb="index" 
+                    v-bind:nb="card.id" 
                     v-bind:title="card.title" 
                     v-bind:subtitle="card.subtitle" 
                     v-bind:flag="card.flag"

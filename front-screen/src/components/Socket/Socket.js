@@ -1,7 +1,7 @@
 import Graph from "../Graph";
-
+import axios from 'axios'
 export default {
-  data: () => ({ time: null, connection: null, screenId: null, message: null }),
+  data: () => ({ time: null, connection: null, screenId: null, message: null, cards: [] }),
   components: {
     Graph
   },
@@ -31,6 +31,11 @@ export default {
         // Vue data binding means you don't need any extra work to
         // update your UI. Just set the `time` and Vue will automatically
         // update the `<h2>`.
+        var card = JSON.parse(event.data)
+        console.log(card)
+        axios.get('http://localhost:8080/reus-api/card/'+card['id']).then(response => {
+          this.cards.push(response.data)
+        })
         this.time = event.data;
       }
     },

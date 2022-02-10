@@ -12,5 +12,5 @@
   </button>
   <input v-model="message" placeholder="message" />
   <button elevation="2" v-on:click="submit(0)">Send message to table</button>
-  <Graph/>
+  <Graph :cards="this.cards"/>
 </div>
