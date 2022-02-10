@@ -1,6 +1,12 @@
 <template>
-  <div id="app">
+  <Map @on-move="onMove"/>
+  <!-- <l-map style="height: 500px" :zoom="zoom" :center="center">
+    <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
+    <l-marker :lat-lng="markerLatLng"></l-marker>
+  </l-map> -->
+  <!-- <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
+    <Map/>
     <Socket/>
     <hr/><br>
     <div style="display: flex;justify-content: center;">
@@ -14,13 +20,14 @@
         </transition-group>
       </div>
     </div>
-  </div>
+  </div> -->
 </template>
 
 <script>
-import Socket from './components/Socket.vue'
-import Card from './components/Card.vue'
+// import Socket from './components/Socket.vue'
+// import Card from './components/Card.vue'
 import axios from 'axios'
+import Map from './components/Map.vue'
 
 export default {
   data(){
@@ -29,13 +36,20 @@ export default {
       loading: false,
       time: null, 
       message: null, 
-      messages: []
+      messages: [],
+            url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution:
+        '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      zoom: 15,
+      center: [51.505, -0.159],
+      markerLatLng: [51.504, -0.159]
     }
   },  
   name: 'App',
   components: {
-    Socket,
-    Card
+    // Socket,
+    // Card,
+    Map,
   },
   methods: {
     onMove(id, event){
