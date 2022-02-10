@@ -57,7 +57,7 @@ export default {
   },
   
   mounted () {
-    axios.get('http://localhost:8080/reus-api/cards').then(response => {
+    axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/cards`).then(response => {
       this.cards = response.data
       this.loading = true
     })
@@ -66,7 +66,7 @@ export default {
   created: function() {
     const PORT = "3000";
     const ID = "0";
-    const IP = "localhost";
+    const IP = process.env.VUE_APP_BACK_IP;
 
     this.connection = new WebSocket(`ws://${IP}:${PORT}?id=${ID}`);
     this.connection.onopen = () => {

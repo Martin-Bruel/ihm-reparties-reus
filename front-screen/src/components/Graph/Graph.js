@@ -37,7 +37,7 @@ export default {
           if (holdingCards.length > 0){
             //At least two cards have a longpress
             console.log("FETCH LINKS : ")
-            axios.get('http://localhost:8080/reus-api/link/'+holdingCards[0]+'/'+id).then(response => {
+            axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/link/`+holdingCards[0]+'/'+id).then(response => {
              const res = response.data
              const cardLink = {
               title: res.title,

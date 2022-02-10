@@ -23,7 +23,7 @@ export default {
     init: function(ID) {
       this.screenId = ID;
       const PORT = "3000";
-      const IP = "localhost";
+      const IP = process.env.VUE_APP_BACK_IP;
 
       this.connection = new WebSocket(`ws://${IP}:${PORT}?id=${ID}`);
       this.connection.onopen = () => {};
@@ -33,7 +33,7 @@ export default {
         // update the `<h2>`.
         var card = JSON.parse(event.data)
         console.log(card)
-        axios.get('http://localhost:8080/reus-api/card/'+card['id']).then(response => {
+        axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/card/`+card['id']).then(response => {
           this.cards.push(response.data)
         })
         this.time = event.data;
