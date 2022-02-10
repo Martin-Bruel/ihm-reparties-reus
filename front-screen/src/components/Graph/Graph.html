@@ -1,10 +1,10 @@
 <div id="graph-container">
-    <button v-on:click="addCard">Ajouter</button>
+    <!-- <button v-on:click="addCard">Ajouter</button> -->
     <transition-group name="list" tag="p">
         <span v-for="(card, index) in cards" v-bind:key="card" class="list-card">
             <Draggable>
                 <Card 
-                    v-touch:touchhold="holdCard(card.id, holdingCards)"
+                    v-touch:touchhold="holdCard(card.id, holdingCards, cardsLinks, lines)"
                     v-touch:end="releaseCard(card.id, holdingCards)"
                     v-bind:nb="card.id" 
                     v-bind:title="card.title" 

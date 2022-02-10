@@ -1,5 +1,6 @@
 import Card from '../Card.vue'
 import LeaderLine from 'leader-line-vue';
+import axios from 'axios';
 
 export default {
   name: 'Graph',
@@ -30,15 +31,44 @@ export default {
     }, 50);
   },
   methods: {
-    holdCard(id, holdingCards){
+    holdCard(id, holdingCards, cardsLinks, lines){
         return function() {
           console.log(id, holdingCards)
           if (holdingCards.length > 0){
             //At least two cards have a longpress
             console.log("FETCH LINKS : ")
-            // axios.get('http://localhost:8080/reus-api/card/'+1).then(response => {
-            //  console.log(response.data)
-            // })
+            axios.get('http://localhost:8080/reus-api/link/'+holdingCards[0]+'/'+id).then(response => {
+             const res = response.data
+             const cardLink = {
+              title: res.title,
+              content : res.content,
+              cardOrLink: 'link'
+             }
+             cardsLinks.push(cardLink)
+             setTimeout(()=>{
+                  const card1Ref = document.getElementById("card"+holdingCards[0])
+                  const card2Ref = document.getElementById("card"+id)
+                  const linkCardRef = document.getElementById("link"+(cardsLinks.length-1).toString())
+                  lines.push(LeaderLine.setLine(
+                    card1Ref,
+                    linkCardRef,
+                    { 
+                      startPlug: 'behind', 
+                      endPlug: 'behind',
+                      color: 'red',
+                    }
+                  ));
+                  lines.push(LeaderLine.setLine(
+                    card2Ref,
+                    linkCardRef,
+                    { 
+                      startPlug: 'behind', 
+                      endPlug: 'behind',
+                      color: 'red',
+                    }
+                  ));
+              }, 100)
+            })
           }
           holdingCards.push(id)
         }
@@ -93,10 +123,6 @@ export default {
                 let linkLabelCart = document.getElementById("link" + (this.cardsLinks.length-1).toString());
   
 
-                console.log("CENSE PUSH")
-                //this.lines.push("aaa")
-                console.log(lastAddedCard)
-                console.log(linkLabelCart)
                 this.lines.push(LeaderLine.setLine(
                   lastAddedCard,
                   linkLabelCart,
@@ -136,7 +162,7 @@ export default {
           img: images[Math.floor(Math.random()*images.length)],
           content : content[Math.floor(Math.random()*content.length)],
           cardOrLink: 'card',
-          id : this.randomIntFromInterval(1, 200)
+          id : this.cards.length
         }
       },
       randomIntFromInterval(min, max) { // min and max included 
