@@ -13,7 +13,7 @@ export default {
         // cards: [this.generateCardContent()],
         cardsLinks: [],
         lines: [],
-        holdingCards: []
+        holdingCards: [],
       }   
   },
   mounted() {

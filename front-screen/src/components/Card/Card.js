@@ -14,7 +14,8 @@ export default {
     },
     data () {
       return {
-        isActive: false
+        isActive: false,
+        url: `http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/image/`
       }
     },
     methods: {
