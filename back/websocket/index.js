@@ -43,9 +43,11 @@ function onTableMessage(data){
     console.log(`message recieve from table: ${json.orientation}`);
     /* send message to the specific screen */
     if (json.orientation == "UP"){
-        screensWS[1].send(JSON.stringify(json))
+        if(screensWS[1] !== undefined)
+            screensWS[1].send(JSON.stringify(json))
     } else {
-        screensWS[2].send(JSON.stringify(json))
+        if(screensWS[2] !== undefined)
+            screensWS[2].send(JSON.stringify(json))
     }
 }
 

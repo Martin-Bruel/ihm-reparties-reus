@@ -7,12 +7,12 @@
         "img" : "clemendile.PNG",
         "positions": [
             {
-                "lon": 43.62806792078592,
-                "lat": 7.282102807121494
+                "lat": 43.545596,
+                "lon": 7.135114
             },
             {
-                "lon": 43.61806792078592,
-                "lat": 7.282102807121494
+                "lat": 43.592690, 
+                "lon": 7.123009
             }
         ],
         "content": "Jeune femme de 26 ans activement recherché dans la région PACA depuis 2020. Elle est Apparue pour la dernière fois à Nice dans une plantation de marijuana."
@@ -25,12 +25,12 @@
         "img": "pabloEscrobar.PNG",
         "positions": [
             {
-                "lon": 43.51806792078592,
-                "lat": 7.282102807121494
+                "lat": 43.592690, 
+                "lon": 7.123009
             },
             {
-                "lon": 43.61806792078592,
-                "lat": 7.212102807121494
+                "lat": 43.665252,
+                "lon": 7.045875
             }
         ],
         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nibh sagittis, vestibulum elit vitae, venenatis justo. Duis vel leo a risus tincidunt tincidunt eu a orci. Pellentesque sagittis maximus nisi a euismod. Phasellus nec velit dui. Fusce fermentum eu leo at elementum. Phasellus vel metus luctus, tincidunt lectus sed, consequat nulla. Suspendisse gravida leo sapien, ac fermentum elit varius sit amet. Fusce ante mi, sagittis at auctor eget, tristique eu tellus. Donec elementum mi blandit tortor feugiat laoreet. Duis aliquam elit velit, at volutpat dolor hendrerit aliquam. Nulla rutrum et ipsum at consequat. Integer lorem sapien, placerat ut ex sed, porta convallis nulla. Nullam porta quis purus non consequat. "
@@ -39,11 +39,11 @@
         "id": 2,
         "title": "François Defrancie",
         "subtitle": "42 ans - France - Boulanger",
-        "img": "francois.png",
+        "img": "francois.jpg",
         "positions": [
             {
-                "lon": 43.11806792078592,
-                "lat": 7.282102807121494
+                "lat": 43.545596,
+                "lon": 7.135114
             }
         ],
         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nibh sagittis, vestibulum elit vitae, venenatis justo. Duis vel leo a risus tincidunt tincidunt eu a orci. Pellentesque sagittis maximus nisi a euismod. Phasellus nec velit dui. Fusce fermentum eu leo at elementum. Phasellus vel metus luctus, tincidunt lectus sed, consequat nulla. Suspendisse gravida leo sapien, ac fermentum elit varius sit amet. Fusce ante mi, sagittis at auctor eget, tristique eu tellus. Donec elementum mi blandit tortor feugiat laoreet. Duis aliquam elit velit, at volutpat dolor hendrerit aliquam. Nulla rutrum et ipsum at consequat. Integer lorem sapien, placerat ut ex sed, porta convallis nulla. Nullam porta quis purus non consequat. "

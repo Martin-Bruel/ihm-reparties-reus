@@ -80,5 +80,6 @@ module.exports = {
     findLinkBetweenCardId,
     findAllLinkedCard,
     findImagePathByName,
-    findAllCardPositions
+    findAllCardPositions,
+    findCardsByPosition
 }

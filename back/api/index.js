@@ -45,17 +45,28 @@ router.get('/link/:id1/:id2', (req, res) => {
     else res.send(link);
 })
 
+/**
+ * Return all card positions
+ */
 router.get('/positions'), (req, res) => {
 
     const positions = Controller.findAllCardPositions();
     res.send(positions);
 }
 
+/**
+ * Return all cards from a given position
+ */
 router.get('/cards/position/longitude/:lon/lattitude/:lat', (req, res) => {
 
-    //const cards = Controller.
+    const position = {lon:req.params.lon,lat:req.params.lon};
+    const cards = Controller.findCardsByPosition(position);
+    res.send(cards)
 })
 
+/**
+ * Send message to table and specifie the id
+ */
 router.post('/table/position/:id', (req, res) => {
 
     const position = req.body;
