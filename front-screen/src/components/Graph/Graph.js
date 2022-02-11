@@ -1,6 +1,7 @@
 import Card from '../Card.vue'
 import LeaderLine from 'leader-line-vue';
 import axios from 'axios';
+import Vue from 'vue'
 
 export default {
   name: 'Graph',
@@ -29,6 +30,7 @@ export default {
     holdCard(id, holdingCards, cardsLinks, lines){
         return function() {
           console.log(id, holdingCards)
+          console.log(Vue.prototype.$screenId)
           if (holdingCards.length > 0){
             //At least two cards have a longpress
             console.log("FETCH LINKS : ")
@@ -78,8 +80,15 @@ export default {
           console.log("releaseCard ", id, holdingCards);
           let index = holdingCards.indexOf(id)
           if (index !== -1){
-            // holdingCards.splice(index, 1)
+            holdingCards.splice(index, 1)
           }
+        }
+      },
+      holdLink (position){
+        return function() {
+          console.log(position)
+          console.log(Vue.prototype.$screenId)
+          axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/table/position/${Vue.prototype.$screenId}`, {lat: position.lat, lon: position.lon})
         }
       },
       addCard () {
