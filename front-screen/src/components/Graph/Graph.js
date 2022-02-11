@@ -88,7 +88,7 @@ export default {
         return function() {
           console.log(position)
           console.log(Vue.prototype.$screenId)
-          axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/table/position/${Vue.prototype.$screenId}`, JSON.stringify(position))
+          axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/table/position/${Vue.prototype.$screenId}`, {lat: position.lat, lon: position.lon})
         }
       },
       addCard () {
