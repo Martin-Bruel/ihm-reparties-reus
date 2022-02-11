@@ -56,5 +56,6 @@ function sendMessageToTable(id, message){
 }
 
 module.exports = {
-    connection
+    connection,
+    sendMessageToTable
 }
