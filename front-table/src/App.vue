@@ -1,11 +1,12 @@
 <template>
   <div>
     <Map :positionNotification="positionNotification"  @on-move="onMove"/>
-    <Notification v-if="notification == true" @close-modal="closeModal"/>
+    <Notification v-if="notification == true" @accept-modal="acceptModal" @close-modal="closeModal"/>
   </div>
 </template>
 
 <script>
+import { latLng } from "leaflet";
 import axios from 'axios'
 import Map from './components/Map.vue'
 import Notification from './components/Notification.vue'
@@ -24,8 +25,9 @@ export default {
       zoom: 15,
       center: [51.505, -0.159],
       markerLatLng: [51.504, -0.159],
-      notification: true,
-      positionNotification: null
+      notification: false,
+      positionNotification: null,
+      result: null
     }
   },  
   name: 'App',
@@ -35,6 +37,10 @@ export default {
   },
   methods: {
     closeModal(){
+      this.notification = false
+    },
+    acceptModal(){
+      this.positionNotification = latLng(this.result.message.lat,this.result.message.lon)
       this.notification = false
     },
     onMove(id, event){
@@ -76,8 +82,8 @@ export default {
       // update your UI. Just set the `time` and Vue will automatically
       // update the `<h2>`.
       this.notification = true
-      console.log(event.data)
-      this.positionNotification = event.data
+      this.result = JSON.parse(event.data)
+      console.log(this.result.message.lat,this.result.message.lon)
       this.messages.push(event.data);
       //this.messages;
     };

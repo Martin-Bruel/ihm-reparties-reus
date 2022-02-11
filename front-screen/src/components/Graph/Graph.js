@@ -80,7 +80,7 @@ export default {
           console.log("releaseCard ", id, holdingCards);
           let index = holdingCards.indexOf(id)
           if (index !== -1){
-            holdingCards.splice(index, 1)
+            //holdingCards.splice(index, 1)
           }
         }
       },
