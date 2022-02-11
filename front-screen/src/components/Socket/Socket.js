@@ -23,6 +23,11 @@ export default {
     },
 
     init: function(ID) {
+
+      if(ID === 3) {
+        document.getElementById("printAddButton").style = "display: block";
+      }
+      
       Vue.prototype.$screenId = ID
       this.screenId = ID;
       const PORT = "3000";
