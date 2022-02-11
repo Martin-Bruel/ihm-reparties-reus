@@ -65,23 +65,25 @@ export default {
             this.modalOpen = !this.modalOpen;
         },
         displayDetails(cards, event){
+            // console.log(event)
             this.detailedCards = cards
             var alignement = 0
             this.detailedCards.forEach(element => {
+                console.log(element)
                 element.positionX = event.containerPoint.x+alignement
                 element.positionY = event.containerPoint.y+alignement
                 alignement += 10
             });
-            // this.detailedCards[0].positionX = event.containerPoint.x
-            // this.detailedCards[0].positionY = event.containerPoint.y
-            console.log(event.containerPoint.x,event.containerPoint.y)
-            console.log(this.detailedCards)
+            this.detailedCards[0].positionX = event.containerPoint.x
+            this.detailedCards[0].positionY = event.containerPoint.y
+            // console.log(event.containerPoint.x,event.containerPoint.y)
+            // console.log(this.detailedCards)
         } 
     },
     created(){
     },
     mounted(){
-        axios.get('http://localhost:8080/reus-api/cards').then(response => {
+        axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/cards`).then(response => {
             this.cards = response.data
             this.points[0].cards.push(this.cards[0])
             this.points[0].cards.push(this.cards[1])

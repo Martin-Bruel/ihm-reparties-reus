@@ -21,7 +21,7 @@
   >
     <l-tile-layer :url="url" :attribution="attribution" />
     <l-marker v-for="point in points" :key="point.id" :lat-lng="point.position"
-    @click="displayDetails(point.cards, $event)"
+    v-on:click="displayDetails(point.cards, $event)"
     >
       <l-icon
         :icon-size="[40,40]"
@@ -32,7 +32,6 @@
   </l-map>
   <transition-group name="list" tag="p">
     <div @stop="onMove(card.id, $event)" v-for="card in detailedCards" :key="card.id" v-draggable :style="{'z-index': 500,'position': 'absolute', 'left': card.positionX+'px', 'top': card.positionY+'px' }">
-      <h1>{{card.positionX}}</h1>
       <Card :title="card.title" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content"/>
     </div>
   </transition-group>
