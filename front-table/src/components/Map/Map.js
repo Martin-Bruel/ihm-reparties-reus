@@ -96,7 +96,7 @@ export default {
         axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/cards`).then(response => {
             this.cards = response.data
             this.points[0].cards.push(this.cards[0])
-            this.points[0].cards.push(this.cards[1])
+            // this.points[0].cards.push(this.cards[1])
             this.points[1].cards.push(this.cards[0])
             this.points[2].cards.push(this.cards[1])
             this.points[2].cards.push(this.cards[2])
