@@ -4,6 +4,9 @@ import axios from 'axios';
 import Card from "../Card.vue";
 export default {
     name: "Example",
+    props: {
+        positionNotification: null
+    },
     components: {
         LMap,
         LTileLayer,

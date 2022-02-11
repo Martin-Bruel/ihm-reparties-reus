@@ -1,12 +1,14 @@
 <template>
-  <Map @on-move="onMove"/>
+  <div>
+    <Map :positionNotification="positionNotification"  @on-move="onMove"/>
+    <Notification v-if="notification == true" @close-modal="closeModal"/>
+  </div>
 </template>
 
 <script>
-// import Socket from './components/Socket.vue'
-// import Card from './components/Card.vue'
 import axios from 'axios'
 import Map from './components/Map.vue'
+import Notification from './components/Notification.vue'
 
 export default {
   data(){
@@ -21,16 +23,20 @@ export default {
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 15,
       center: [51.505, -0.159],
-      markerLatLng: [51.504, -0.159]
+      markerLatLng: [51.504, -0.159],
+      notification: true,
+      positionNotification: null
     }
   },  
   name: 'App',
   components: {
-    // Socket,
-    // Card,
+    Notification,
     Map,
   },
   methods: {
+    closeModal(){
+      this.notification = false
+    },
     onMove(id, event){
       if (event.detail.event.screenY < 80){
         this.sendCard(id, "UP")
@@ -69,6 +75,9 @@ export default {
       // Vue data binding means you don't need any extra work to
       // update your UI. Just set the `time` and Vue will automatically
       // update the `<h2>`.
+      this.notification = true
+      console.log(event.data)
+      this.positionNotification = event.data
       this.messages.push(event.data);
       //this.messages;
     };
