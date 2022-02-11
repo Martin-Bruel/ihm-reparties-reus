@@ -44,4 +44,23 @@ router.get('/link/:id1/:id2', (req, res) => {
     else res.send(link);
 })
 
+router.get('/positions'), (req, res) => {
+
+    const positions = Controller.findAllCardPositions();
+    res.send(positions);
+}
+
+router.get('/cards/position/longitude/:lon/lattitude/:lat', (req, res) => {
+
+    //const cards = Controller.
+})
+
+router.post('/talble/position/:id', (req, res) => {
+
+    const position = req.body;
+    const screenId = req.params.id;
+
+    sendMessageToTable(screenId, position);
+})
+
 module.exports = router;

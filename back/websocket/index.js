@@ -33,7 +33,7 @@ function onScreenMessage(data){
     const json = JSON.parse(data);
     console.log(`message recieve from screen: ${json.message}`);
     /* send message to table */
-    tableWS.send(json.message);
+    tableWS.send(json);
 }
 
 /* handle table message */
@@ -47,6 +47,12 @@ function onTableMessage(data){
     } else {
         screensWS[2].send(JSON.stringify(json))
     }
+}
+
+function sendMessageToTable(id, message){
+
+    const res = {id:id, message:message};
+    tableWS.send(JSON.stringify(res));
 }
 
 module.exports = {
