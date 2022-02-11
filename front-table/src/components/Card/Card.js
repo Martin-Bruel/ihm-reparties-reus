@@ -17,7 +17,7 @@ export default {
     return {
       windowHeight: window.innerHeight,
       isActive: false,
-      url: "http://localhost:8080/reus-api/image/"
+      url: `http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/image/`
     }
   },
   methods: {

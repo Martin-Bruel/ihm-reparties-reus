@@ -1,25 +1,12 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <hr/><br>
-    <div style="display: flex;justify-content: center;">
-      <div v-if="loading">
-        <transition-group name="list" tag="p">
-          <div v-for="card in cards" :key="card.id" v-draggable >
-              <div v-draggable @stop="onMove(card.id, $event)">
-                <Card :title="card.title" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content" />
-              </div>
-          </div>
-        </transition-group>
-      </div>
-    </div>
-  </div>
+  <Map @on-move="onMove"/>
 </template>
 
 <script>
-
-import Card from './components/Card.vue'
+// import Socket from './components/Socket.vue'
+// import Card from './components/Card.vue'
 import axios from 'axios'
+import Map from './components/Map.vue'
 
 export default {
   data(){
@@ -28,12 +15,20 @@ export default {
       loading: false,
       time: null, 
       message: null, 
-      messages: []
+      messages: [],
+            url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+      attribution:
+        '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
+      zoom: 15,
+      center: [51.505, -0.159],
+      markerLatLng: [51.504, -0.159]
     }
   },  
   name: 'App',
   components: {
-    Card
+    // Socket,
+    // Card,
+    Map,
   },
   methods: {
     onMove(id, event){
@@ -55,7 +50,7 @@ export default {
   },
   
   mounted () {
-    axios.get('http://localhost:8080/reus-api/cards').then(response => {
+    axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/cards`).then(response => {
       this.cards = response.data
       this.loading = true
     })
@@ -64,7 +59,7 @@ export default {
   created: function() {
     const PORT = "3000";
     const ID = "0";
-    const IP = "localhost";
+    const IP = process.env.VUE_APP_BACK_IP;
 
     this.connection = new WebSocket(`ws://${IP}:${PORT}?id=${ID}`);
     this.connection.onopen = () => {
@@ -82,13 +77,20 @@ export default {
 </script>
 
 <style>
+
+html, body, #app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #181a1b;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .list-card {
     display: inline-block;

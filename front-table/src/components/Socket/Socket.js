@@ -19,7 +19,7 @@ export default {
     created: function() {
       const PORT = "3000";
       const ID = "0";
-      const IP = "localhost";
+      const IP = process.env.VUE_APP_BACK_IP;
   
       this.connection = new WebSocket(`ws://${IP}:${PORT}?id=${ID}`);
       this.connection.onopen = () => {

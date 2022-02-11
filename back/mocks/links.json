@@ -1,0 +1,33 @@
+[
+    {
+        "title": "Garage de Pedro",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nibh sagittis, vestibulum elit vitae, venenatis justo. Duis vel leo a risus tincidunt tincidunt eu a orci. Pellentesque sagittis maximus nisi a euismod. Phasellus nec velit dui",
+        "id1": 1,
+        "id2": 2,
+        "position": {
+            "lon": 43.62806792078592,
+            "lat": 7.282102807121494
+        }
+    },
+    {
+        "title": "Cartel de Madeline",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nibh sagittis, vestibulum elit vitae, venenatis justo. Duis vel leo a risus tincidunt tincidunt eu a orci. Pellentesque sagittis maximus nisi a euismod. Phasellus nec velit dui",
+        "id1": 1,
+        "id2": 0,
+        "position": {
+            "lon": 43.52806792078592,
+            "lat": 7.182102807121494
+        }
+        
+    },
+    {
+        "title": "Vente de produits",
+        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nibh sagittis, vestibulum elit vitae, venenatis justo. Duis vel leo a risus tincidunt tincidunt eu a orci. Pellentesque sagittis maximus nisi a euismod. Phasellus nec velit dui",
+        "id1": 0,
+        "id2": 2,
+        "position": {
+            "lon": 43.72806792078592,
+            "lat": 7.182102807121494
+        }
+    }
+]

@@ -1,13 +1,18 @@
 import Card from '../Card.vue'
 import LeaderLine from 'leader-line-vue';
+import axios from 'axios';
 
 export default {
   name: 'Graph',
+  props : {
+    cards: null
+  },
   data () {
       return {
-        cards: [this.generateCardContent()],
+        // cards: [this.generateCardContent()],
         cardsLinks: [],
-        lines: []
+        lines: [],
+        holdingCards: []
       }   
   },
   mounted() {
@@ -21,6 +26,57 @@ export default {
     }, 50);
   },
   methods: {
+    holdCard(id, holdingCards, cardsLinks, lines){
+        return function() {
+          console.log(id, holdingCards)
+          if (holdingCards.length > 0){
+            //At least two cards have a longpress
+            console.log("FETCH LINKS : ")
+            axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/link/`+holdingCards[0]+'/'+id).then(response => {
+             const res = response.data
+             const cardLink = {
+              title: res.title,
+              content : res.content,
+              cardOrLink: 'link'
+             }
+             cardsLinks.push(cardLink)
+             setTimeout(()=>{
+                  const card1Ref = document.getElementById("card"+holdingCards[0])
+                  const card2Ref = document.getElementById("card"+id)
+                  const linkCardRef = document.getElementById("link"+(cardsLinks.length-1).toString())
+                  lines.push(LeaderLine.setLine(
+                    card1Ref,
+                    linkCardRef,
+                    { 
+                      startPlug: 'behind', 
+                      endPlug: 'behind',
+                      color: 'black',
+                    }
+                  ));
+                  lines.push(LeaderLine.setLine(
+                    card2Ref,
+                    linkCardRef,
+                    { 
+                      startPlug: 'behind', 
+                      endPlug: 'behind',
+                      color: 'black',
+                    }
+                  ));
+              }, 100)
+            })
+          }
+          holdingCards.push(id)
+        }
+      },
+      releaseCard(id, holdingCards){
+        return function() {
+          console.log("releaseCard ", id, holdingCards);
+          let index = holdingCards.indexOf(id)
+          if (index !== -1){
+            holdingCards.splice(index, 1)
+          }
+        }
+      },
       addCard () {
           this.cards.push(this.generateCardContent());
 
@@ -48,7 +104,7 @@ export default {
               // console.log("randomCardId : " + randomCardId)
   
               console.log("Start " + (this.cards.length-1).toString());     
-              let lastAddedCard = document.getElementById("card" + (this.cards.length-1).toString());
+              let lastAddedCard = document.getElementById("card" + this.cards[0].id.toString());
               // console.log(lastAddedCard);
   
               console.log("End " + randomCardId.toString());
@@ -100,7 +156,8 @@ export default {
           flag: flags[Math.floor(Math.random()*flags.length)],
           img: images[Math.floor(Math.random()*images.length)],
           content : content[Math.floor(Math.random()*content.length)],
-          cardOrLink: 'card'
+          cardOrLink: 'card',
+          id : this.cards.length
         }
       },
       randomIntFromInterval(min, max) { // min and max included 
