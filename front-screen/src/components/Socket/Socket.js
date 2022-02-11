@@ -24,10 +24,11 @@ export default {
 
     init: function(ID) {
 
-      if(ID === 3) {
-        document.getElementById("printAddButton").style = "display: block";
+      if(ID == 3) {
+        document.getElementById("printAddButton").classList.add("visible");
+        document.getElementById("printAddButton").classList.remove("hidden");
       }
-      
+
       Vue.prototype.$screenId = ID
       this.screenId = ID;
       const PORT = "3000";
