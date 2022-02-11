@@ -1,7 +1,7 @@
 export default {
     name: 'Card',
     props: {
-      nb : Number,
+      id : null,
       cardOrLink: String,
       title: String,
       subtitle: String,
@@ -24,6 +24,9 @@ export default {
         holdHandlerEnd(){
             this.isActive = false
         }
+    },
+    mounted() {
+      console.log(this.id)
     }
   }
   

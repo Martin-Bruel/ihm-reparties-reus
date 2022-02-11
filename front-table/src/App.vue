@@ -1,26 +1,5 @@
 <template>
   <Map @on-move="onMove"/>
-  <!-- <l-map style="height: 500px" :zoom="zoom" :center="center">
-    <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
-    <l-marker :lat-lng="markerLatLng"></l-marker>
-  </l-map> -->
-  <!-- <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Map/>
-    <Socket/>
-    <hr/><br>
-    <div style="display: flex;justify-content: center;">
-      <div v-if="loading">
-        <transition-group name="list" tag="p">
-          <div v-for="card in cards" :key="card.id" v-draggable >
-              <div v-draggable @stop="onMove(card.id, $event)">
-                <Card :title="card.title" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content" />
-              </div>
-          </div>
-        </transition-group>
-      </div>
-    </div>
-  </div> -->
 </template>
 
 <script>
@@ -71,7 +50,7 @@ export default {
   },
   
   mounted () {
-    axios.get('http://localhost:8080/reus-api/cards').then(response => {
+    axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/cards`).then(response => {
       this.cards = response.data
       this.loading = true
     })
@@ -80,7 +59,7 @@ export default {
   created: function() {
     const PORT = "3000";
     const ID = "0";
-    const IP = "localhost";
+    const IP = process.env.VUE_APP_BACK_IP;
 
     this.connection = new WebSocket(`ws://${IP}:${PORT}?id=${ID}`);
     this.connection.onopen = () => {
@@ -98,13 +77,20 @@ export default {
 </script>
 
 <style>
+
+html, body, #app {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #181a1b;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .list-card {
     display: inline-block;
