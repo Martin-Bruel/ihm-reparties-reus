@@ -34,6 +34,16 @@ export default {
                     id: 0,
                     position: latLng(43.6772055254188, 7.221590151093953),
                     cards: []
+                },
+                {
+                    id: 1,
+                    position: latLng(43.66125715133231, 7.149229672934273),
+                    cards: []
+                },
+                {
+                    id: 2,
+                    position: latLng(43.70979412389887, 7.123823790405431),
+                    cards: []
                 }
             ],
             showMap: true,
@@ -87,6 +97,9 @@ export default {
             this.cards = response.data
             this.points[0].cards.push(this.cards[0])
             this.points[0].cards.push(this.cards[1])
+            this.points[1].cards.push(this.cards[0])
+            this.points[2].cards.push(this.cards[1])
+            this.points[2].cards.push(this.cards[2])
             console.log(this.cards)
             console.log(this.points)
         })
