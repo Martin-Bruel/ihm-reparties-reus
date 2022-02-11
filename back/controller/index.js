@@ -64,11 +64,21 @@ function findAllLinkedCard(cardId){
 
 }
 
+
+function findAllCardPositions(){
+    return cards.map((c) => c.positions);
+}
+
+function findCardsByPosition(position){
+    return cards.find((c) => c.positions == position);
+}
+
 module.exports = {
     findAllCard,
     findLinkById,
     findCardById,
     findLinkBetweenCardId,
     findAllLinkedCard,
-    findImagePathByName
+    findImagePathByName,
+    findAllCardPositions
 }

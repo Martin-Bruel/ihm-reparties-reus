@@ -19,6 +19,7 @@
     <span v-for="(card, index) in cardsLinks" v-bind:key="card" class="list-card">
         <Draggable>
             <Card 
+                v-touch:touchhold="holdLink(card.position)"
                 v-bind:id="index" 
                 v-bind:title="card.title" 
                 v-bind:content="card.content"

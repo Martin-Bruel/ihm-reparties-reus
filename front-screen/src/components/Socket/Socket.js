@@ -1,5 +1,7 @@
 import Graph from "../Graph";
 import axios from 'axios'
+import Vue from 'vue'
+
 export default {
   data: () => ({ time: null, connection: null, screenId: null, message: null, cards: [], screenInitialized: false }),
   components: {
@@ -21,6 +23,7 @@ export default {
     },
 
     init: function(ID) {
+      Vue.prototype.$screenId = ID
       this.screenId = ID;
       const PORT = "3000";
       const IP = process.env.VUE_APP_BACK_IP;
