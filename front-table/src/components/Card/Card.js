@@ -3,6 +3,7 @@ export default {
   props: {
     title: String,
     subtitle: String,
+    id: Number,
     callback: {
       type: Function,
     },
@@ -34,12 +35,12 @@ export default {
         console.log(position.getBoundingClientRect().top)
       },
 
-      doMessage() {
-        const msg = {
-          id: 2,
-          message: "yolo",
-        };
-        this.callback(JSON.stringify(msg));
+      sendCardToScreen() {
+        const card = {
+          id : this.id,
+          direction: "Haut"
+        }
+        this.callback(JSON.stringify(card));
       }
   }
 }
