@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const router = new Router();
 const Controller = require('../controller');
+const Websocket = require('../websocket')
 
 /**
  * Return all cards
@@ -42,6 +43,27 @@ router.get('/link/:id1/:id2', (req, res) => {
     const link = Controller.findLinkBetweenCardId(parseInt(req.params.id1), parseInt(req.params.id2));
     if(link === undefined) res.sendStatus(404);
     else res.send(link);
+})
+
+router.get('/positions'), (req, res) => {
+
+    const positions = Controller.findAllCardPositions();
+    res.send(positions);
+}
+
+router.get('/cards/position/longitude/:lon/lattitude/:lat', (req, res) => {
+
+    //const cards = Controller.
+})
+
+router.post('/table/position/:id', (req, res) => {
+
+    const position = req.body;
+    const screenId = req.params.id;
+
+    console.log(`Message receive from screen ${screenId} : ${position.lat}:${position.lon}`)
+    Websocket.sendMessageToTable(screenId, position);
+    res.sendStatus(200);
 })
 
 module.exports = router;

@@ -1,6 +1,7 @@
 import Card from '../Card.vue'
 import LeaderLine from 'leader-line-vue';
 import axios from 'axios';
+import Vue from 'vue'
 
 export default {
   name: 'Graph',
@@ -29,40 +30,46 @@ export default {
     holdCard(id, holdingCards, cardsLinks, lines){
         return function() {
           console.log(id, holdingCards)
+          console.log(Vue.prototype.$screenId)
           if (holdingCards.length > 0){
             //At least two cards have a longpress
             console.log("FETCH LINKS : ")
             axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/link/`+holdingCards[0]+'/'+id).then(response => {
              const res = response.data
-             const cardLink = {
-              title: res.title,
-              content : res.content,
-              cardOrLink: 'link'
-             }
-             cardsLinks.push(cardLink)
-             setTimeout(()=>{
-                  const card1Ref = document.getElementById("card"+holdingCards[0])
-                  const card2Ref = document.getElementById("card"+id)
-                  const linkCardRef = document.getElementById("link"+(cardsLinks.length-1).toString())
-                  lines.push(LeaderLine.setLine(
-                    card1Ref,
-                    linkCardRef,
-                    { 
-                      startPlug: 'behind', 
-                      endPlug: 'behind',
-                      color: 'black',
-                    }
-                  ));
-                  lines.push(LeaderLine.setLine(
-                    card2Ref,
-                    linkCardRef,
-                    { 
-                      startPlug: 'behind', 
-                      endPlug: 'behind',
-                      color: 'black',
-                    }
-                  ));
-              }, 100)
+
+              if(cardsLinks.filter(item => item.id === res.id).length === 0) {
+                const cardLink = {
+                  id: res.id,
+                  title: res.title,
+                  content : res.content,
+                  position: res.position,
+                  cardOrLink: 'link'
+                 }
+                 cardsLinks.push(cardLink)
+                 setTimeout(()=>{
+                      const card1Ref = document.getElementById("card"+holdingCards[0])
+                      const card2Ref = document.getElementById("card"+id)
+                      const linkCardRef = document.getElementById("link"+(cardsLinks.length-1).toString())
+                      lines.push(LeaderLine.setLine(
+                        card1Ref,
+                        linkCardRef,
+                        { 
+                          startPlug: 'behind', 
+                          endPlug: 'behind',
+                          color: 'white',
+                        }
+                      ));
+                      lines.push(LeaderLine.setLine(
+                        card2Ref,
+                        linkCardRef,
+                        { 
+                          startPlug: 'behind', 
+                          endPlug: 'behind',
+                          color: 'white',
+                        }
+                      ));
+                  }, 100)
+              }        
             })
           }
           holdingCards.push(id)
@@ -75,6 +82,13 @@ export default {
           if (index !== -1){
             holdingCards.splice(index, 1)
           }
+        }
+      },
+      holdLink (position){
+        return function() {
+          console.log(position)
+          console.log(Vue.prototype.$screenId)
+          axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/table/position/${Vue.prototype.$screenId}`, {lat: position.lat, lon: position.lon})
         }
       },
       addCard () {
@@ -124,7 +138,7 @@ export default {
                   { 
                     startPlug: 'behind', 
                     endPlug: 'behind',
-                    color: 'black',
+                    color: 'white',
                   }
                 )); 
                 
@@ -134,7 +148,7 @@ export default {
                   { 
                     startPlug: 'behind', 
                     endPlug: 'behind',
-                    color: 'black',
+                    color: 'white',
                   }
                 )); 
                 console.log("--------------------------");
