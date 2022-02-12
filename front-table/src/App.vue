@@ -32,10 +32,17 @@ export default {
   },
   methods: {
     onMove(id, event){
-      if (event.detail.event.screenY < 80){
+
+      let y = event.detail.event.screenY
+      let x = event.detail.event.screenX
+
+      if (y === undefined) y = event.detail.event.changedTouches[0].clientY
+      if (x === undefined) x = event.detail.event.changedTouches[0].clientX
+
+      if (y < 80){
         this.sendCard(id, "UP")
         console.log("Envoyé Ecran 1")
-      } else if (event.detail.event.screenX < 80){
+      } else if (x < 80){
         this.sendCard(id, "LEFT")
         console.log("Envoyé Ecran 2")
       }

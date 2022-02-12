@@ -55,7 +55,12 @@ export default {
     methods: {
         onMove(id, event){
             this.$emit('on-move', id, event)
-            if (event.detail.event.screenY < 80 || event.detail.event.screenX < 80){
+            let y = event.detail.event.screenY
+            let x = event.detail.event.screenX
+
+            if (y === undefined) y = event.detail.event.changedTouches[0].clientY
+            if (x === undefined) x = event.detail.event.changedTouches[0].clientX
+            if (y < 80 || x < 80){
                 this.detailedCards = this.detailedCards.filter(card => card.id != id);
             } 
         },
