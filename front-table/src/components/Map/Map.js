@@ -49,7 +49,8 @@ export default {
             showMap: true,
             modalOpen: false,
             showModal: false,
-            detailedCards: []
+            detailedCards: [],
+            showShadow: false
         };
     },
     methods: {
@@ -93,7 +94,13 @@ export default {
             this.detailedCards[0].positionY = event.containerPoint.y
             // console.log(event.containerPoint.x,event.containerPoint.y)
             // console.log(this.detailedCards)
-        } 
+        },
+        activateShadow(){
+            this.showShadow = true;
+        },
+        desactivateShadow(){
+            this.showShadow = false;
+        }
     },
     created(){
     },

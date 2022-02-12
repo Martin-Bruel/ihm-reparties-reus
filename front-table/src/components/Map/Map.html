@@ -9,6 +9,8 @@
             Toggle map
         </button>
     </div> -->
+  <span v-bind:class="[{ activeTopShadow: showShadow }, 'topShadow']"></span>
+  <span v-bind:class="[{ activeLeftShadow: showShadow }, 'leftShadow']"></span>
   <l-map
     z-index="0"
     v-if="showMap"
@@ -31,7 +33,7 @@
     </l-marker>
   </l-map>
   <transition-group name="list" tag="p" style="margin: 0;">
-    <div @stop="onMove(card.id, $event)" v-for="card in detailedCards" :key="card.id" v-draggable :style="{'z-index': 500,'position': 'absolute', 'left': card.positionX+'px', 'top': card.positionY+'px' }">
+    <div v-touch:start="activateShadow" v-touch:end="desactivateShadow" @stop="onMove(card.id, $event)" v-for="card in detailedCards" :key="card.id" v-draggable :style="{'z-index': 500,'position': 'absolute', 'left': card.positionX+'px', 'top': card.positionY+'px' }">
       <Card :title="card.title" :subtitle="card.subtitle" :flag="card.flag" :img="card.img" :content="card.content"/>
     </div>
   </transition-group>
