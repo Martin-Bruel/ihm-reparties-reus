@@ -39,7 +39,7 @@ export default {
     },
     methods: {
         onMove(id, event){
-            this.$emit('on-move', id, event)
+            this.$emit('on-move', this.detailedCards,id, event)
             let y = event.detail.event.screenY
             let x = event.detail.event.screenX
 

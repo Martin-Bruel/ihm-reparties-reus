@@ -10,7 +10,6 @@ import Map from './components/Map.vue'
 export default {
   data(){
     return {
-      cards: null,
       time: null, 
       message: null, 
       messages: [],
@@ -29,7 +28,7 @@ export default {
     Map,
   },
   methods: {
-    onMove(id, event){
+    onMove(cards, id, event){
 
       let y = event.detail.event.screenY
       let x = event.detail.event.screenX
@@ -38,18 +37,17 @@ export default {
       if (x === undefined) x = event.detail.event.changedTouches[0].clientX
 
       if (y < 80){
-        this.sendCard(id, "UP")
+        this.sendCard(cards, id, "UP")
         console.log("Envoyé Ecran 1")
       } else if (x < 80){
-        this.sendCard(id, "LEFT")
+        this.sendCard(cards, id, "LEFT")
         console.log("Envoyé Ecran 2")
       }
     },
-    sendCard(id, orientation){
+    sendCard(cards, id, orientation){
       console.log(id, orientation);
-      console.log(this.cards)
-      this.cards = this.cards.filter(card => card.id != id);
-      console.log(this.cards)
+      console.log(cards)
+      cards = cards.filter(card => card.id != id);
       this.connection.send('{"id": '+id+',"orientation": "'+orientation+'"}')
     }
   },
