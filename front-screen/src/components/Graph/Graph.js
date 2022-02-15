@@ -11,7 +11,7 @@ export default {
   data () {
       return {
         // cards: [this.generateCardContent()],
-        cardsLinks: [],
+        linkIds: [],
         lines: [],
         holdingCards: [],
       }   
@@ -27,49 +27,14 @@ export default {
     }, 50);
   },
   methods: {
-    holdCard(id, holdingCards, cardsLinks, lines){
+      holdCard(id, holdingCards, showMultipleElements){
         return function() {
-          console.log(id, holdingCards)
-          console.log(Vue.prototype.$screenId)
           if (holdingCards.length > 0){
             //At least two cards have a longpress
             console.log("FETCH LINKS : ")
-            axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/link/`+holdingCards[0]+'/'+id).then(response => {
-             const res = response.data
-
-              if(cardsLinks.filter(item => item.id === res.id).length === 0) {
-                const cardLink = {
-                  id: res.id,
-                  title: res.title,
-                  content : res.content,
-                  position: res.position,
-                  cardOrLink: 'link'
-                 }
-                 cardsLinks.push(cardLink)
-                 setTimeout(()=>{
-                      const card1Ref = document.getElementById("card"+holdingCards[0])
-                      const card2Ref = document.getElementById("card"+id)
-                      const linkCardRef = document.getElementById("link"+(cardsLinks.length-1).toString())
-                      lines.push(LeaderLine.setLine(
-                        card1Ref,
-                        linkCardRef,
-                        { 
-                          startPlug: 'behind', 
-                          endPlug: 'behind',
-                          color: 'white',
-                        }
-                      ));
-                      lines.push(LeaderLine.setLine(
-                        card2Ref,
-                        linkCardRef,
-                        { 
-                          startPlug: 'behind', 
-                          endPlug: 'behind',
-                          color: 'white',
-                        }
-                      ));
-                  }, 100)
-              }        
+            axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/path/`+holdingCards[0]+'/'+id).then(response => {
+              const res = response.data
+              showMultipleElements(res.cards, res.links)
             })
           }
           holdingCards.push(id)
@@ -77,12 +42,43 @@ export default {
       },
       releaseCard(id, holdingCards){
         return function() {
-          console.log("releaseCard ", id, holdingCards);
           let index = holdingCards.indexOf(id)
           if (index !== -1){
             holdingCards.splice(index, 1)
           }
         }
+      },
+      expandNode(id){
+        console.log("FETCH EXPAND NODES : "+id)
+        axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/cards/links/`+id).then(response => {
+          const res = response.data
+          this.showMultipleElements(res.cards, res.links)
+        })
+      },
+      showMultipleElements(nodes, edges){
+        console.log(nodes, edges)
+        nodes.map((n)=>{
+          if (this.cards.filter(item => item.id === n.id).length === 0)
+            this.cards.push(n)
+        })
+        setTimeout(()=>{
+          edges.map((e)=>{
+            if (!this.linkIds.includes(e.id)){
+              const card1Ref = document.getElementById("card"+e.id1)
+              const card2Ref = document.getElementById("card"+e.id2)
+              this.lines.push(LeaderLine.setLine(
+                card1Ref,
+                card2Ref,
+                { 
+                  startPlug: 'behind', 
+                  endPlug: 'behind',
+                  color: 'white',
+                  middleLabel: LeaderLine.obj.captionLabel(e.title, {color: '#f8f9fa', outlineColor: '#212529', fontSize: '1.3rem', fontFamily: 'Avenir, Helvetica, Arial, sans-serif'})
+                }
+              ));
+            }
+          })
+        }, 100)
       },
       holdLink (position){
         return function() {
@@ -139,6 +135,7 @@ export default {
                     startPlug: 'behind', 
                     endPlug: 'behind',
                     color: 'white',
+                    middleLabel: LeaderLine.obj.captionLabel('Middle', {color: '#f8f9fa', outlineColor: '#212529', fontSize: '1.3rem', fontFamily: 'Avenir, Helvetica, Arial, sans-serif'})
                   }
                 )); 
                 

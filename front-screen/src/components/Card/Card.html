@@ -1,7 +1,9 @@
-<div v-bind:id="cardOrLink + id.toString()" v-touch:end="holdHandlerEnd" v-touch:start="holdHandler" v-bind:class="[{ cardActive: isActive }, 'card']">
-    <img v-if="img" class="picture" :alt="title" :src="url+img">
-    <h1 class="title">{{ title }}</h1>
-    <h3 v-if="subtitle" class="subtitle"><img v-if="flag" class="flag" :src="url+flag">{{ subtitle }}</h3>
-    <p class="content">{{ content }}</p>
+<div v-bind:id="'card' + id.toString()" v-touch:tap="detectDoubleTap">
+    <div  v-touch:end="holdHandlerEnd" v-touch:start="holdHandler" v-bind:class="[{ cardActive: isActive }, 'card']">
+        <img v-if="img" v-bind:class="type === 'image' || type === 'image' ? 'bigPicture' : 'picture'" :alt="title" :src="url+img">
+        <h1 class="title">{{ title }}</h1>
+        <h3 v-if="subtitle" class="subtitle"><img v-if="flag" class="flag" :src="url+flag">{{ subtitle }}</h3>
+        <p class="content">{{ content }}</p>
+    </div>
 </div>
 

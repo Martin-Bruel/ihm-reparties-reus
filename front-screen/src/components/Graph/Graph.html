@@ -5,26 +5,17 @@
         <span v-for="(card, index) in cards" v-bind:key="card" class="list-card">
             <Draggable>
                 <Card 
-                    v-touch:touchhold="holdCard(card.id, holdingCards, cardsLinks, lines)"
+                    v-touch:touchhold="holdCard(card.id, holdingCards, showMultipleElements)"
                     v-touch:end="releaseCard(card.id, holdingCards)"
+                    v-bind:expandNode="expandNode"
                     v-bind:id="card.id" 
                     v-bind:title="card.title" 
                     v-bind:subtitle="card.subtitle" 
                     v-bind:flag="card.flag"
                     v-bind:img="card.img"
                     v-bind:content="card.content"
-                    v-bind:cardOrLink="card.cardOrLink" />
+                    v-bind:type="card.type" />
             </Draggable>
         </span>
     </transition-group>
-    <span v-for="(card, index) in cardsLinks" v-bind:key="card" class="list-card">
-        <Draggable>
-            <Card 
-                v-touch:touchhold="holdLink(card.position)"
-                v-bind:id="index" 
-                v-bind:title="card.title" 
-                v-bind:content="card.content"
-                v-bind:cardOrLink="card.cardOrLink" />
-        </Draggable>
-    </span>
 </div>

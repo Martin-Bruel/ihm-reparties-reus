@@ -63,6 +63,7 @@ export default {
             if (x === undefined) x = event.detail.event.changedTouches[0].clientX
             if (y < 80 || x < 80){
                 this.detailedCards = this.detailedCards.filter(card => card.id != id);
+                this.showShadow = false;
             } 
         },
         zoomUpdate(zoom) {
