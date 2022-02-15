@@ -5,14 +5,12 @@
 <script>
 // import Socket from './components/Socket.vue'
 // import Card from './components/Card.vue'
-import axios from 'axios'
 import Map from './components/Map.vue'
 
 export default {
   data(){
     return {
       cards: null,
-      loading: false,
       time: null, 
       message: null, 
       messages: [],
@@ -54,13 +52,6 @@ export default {
       console.log(this.cards)
       this.connection.send('{"id": '+id+',"orientation": "'+orientation+'"}')
     }
-  },
-  
-  mounted () {
-    axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/cards`).then(response => {
-      this.cards = response.data
-      this.loading = true
-    })
   },
 
   created: function() {

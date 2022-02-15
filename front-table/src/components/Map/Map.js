@@ -29,23 +29,7 @@ export default {
             mapOptions: {
                 zoomSnap: 0.5
             },
-            points: [
-                {
-                    id: 0,
-                    position: latLng(43.6772055254188, 7.221590151093953),
-                    cards: []
-                },
-                {
-                    id: 1,
-                    position: latLng(43.66125715133231, 7.149229672934273),
-                    cards: []
-                },
-                {
-                    id: 2,
-                    position: latLng(43.70979412389887, 7.123823790405431),
-                    cards: []
-                }
-            ],
+            points: [],
             showMap: true,
             modalOpen: false,
             showModal: false,
@@ -80,20 +64,23 @@ export default {
         openModal() {
             this.modalOpen = !this.modalOpen;
         },
-        displayDetails(cards, event){
-            // console.log(event)
-            this.detailedCards = cards
-            var alignement = 0
-            this.detailedCards.forEach(element => {
-                console.log(element)
-                element.positionX = event.containerPoint.x+alignement
-                element.positionY = event.containerPoint.y+alignement
-                alignement += 10
-            });
-            this.detailedCards[0].positionX = event.containerPoint.x
-            this.detailedCards[0].positionY = event.containerPoint.y
-            // console.log(event.containerPoint.x,event.containerPoint.y)
-            // console.log(this.detailedCards)
+        displayDetails(point, event){
+            
+            axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/cards/position`, {lat:point.position.lat, lon:point.position.lng}).then(response => {
+                this.detailedCards = response.data
+                var alignement = 0
+                this.detailedCards.forEach(element => {
+                    console.log(element)
+                    element.positionX = event.containerPoint.x+alignement
+                    element.positionY = event.containerPoint.y+alignement
+                    alignement += 10
+                });
+                this.detailedCards[0].positionX = event.containerPoint.x
+                this.detailedCards[0].positionY = event.containerPoint.y
+                // console.log(event.containerPoint.x,event.containerPoint.y)
+                // console.log(this.detailedCards)
+            })
+            
         },
         activateShadow(){
             this.showShadow = true;
@@ -105,15 +92,14 @@ export default {
     created(){
     },
     mounted(){
-        axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/cards`).then(response => {
-            this.cards = response.data
-            this.points[0].cards.push(this.cards[0])
-            // this.points[0].cards.push(this.cards[1])
-            this.points[1].cards.push(this.cards[0])
-            this.points[2].cards.push(this.cards[1])
-            this.points[2].cards.push(this.cards[2])
-            console.log(this.cards)
-            console.log(this.points)
+        axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/positions`).then(response => {
+            const postions = response.data;
+            for(let [i, position] of postions.entries()){
+                this.points.push({
+                    id: i,
+                    position: latLng(position.lat, position.lon)
+                })
+            }
         })
     }
 };

@@ -112,11 +112,31 @@ function shortestPath(source, target) {
 
 
 function findAllCardPositions(){
-    return cards.map((c) => c.positions);
+    const positions = [];
+    for(let c of cards){
+        if(c.position !== undefined && !positions.some(pos => c.position.lat == pos.lat && c.position.lon == pos.lon)){
+            positions.push(c.position);
+        }
+        else if(c.positions !== undefined){
+            for(p of c.positions){
+                if(!positions.some(pos => p.lat == pos.lat && p.lon == pos.lon)) positions.push(p)
+            }
+        }
+    }
+    return positions
 }
 
 function findCardsByPosition(position){
-    return cards.filter((c) => c.positions == position);
+    return cards.filter((c) => {
+
+        if(c.position !== undefined){
+            return c.position.lat == position.lat && c.position.lon == position.lon
+        }
+        else if(c.positions !== undefined){
+            return c.positions.some(pos => position.lat == pos.lat && position.lon == pos.lon)
+        }
+        return false
+    });
 }
 
 function findLinksForId(id){

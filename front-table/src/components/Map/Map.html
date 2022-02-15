@@ -22,8 +22,8 @@
     @update:zoom="zoomUpdate"
   >
     <l-tile-layer :url="url" :attribution="attribution" />
-    <l-marker v-for="point in points" :key="point.id" :lat-lng="point.position"
-    v-on:click="displayDetails(point.cards, $event)"
+    <l-marker v-for="point, index in points" :key="point.id" :lat-lng="point.position"
+    v-on:click="displayDetails(point, $event)"
     >
       <l-icon
         :icon-size="[40,40]"
