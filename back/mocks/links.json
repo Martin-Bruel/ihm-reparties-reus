@@ -166,17 +166,6 @@
     },
     {
         "id":14,
-        "title": "Employé",
-        "content": "",
-        "id1": 3,
-        "id2": 2,
-        "position": {
-            "lon": 43.62806792078592,
-            "lat": 7.282102807121494
-        }
-    },
-    {
-        "id":14,
         "title": "Frère jumeaux",
         "content": "",
         "id1": 13,

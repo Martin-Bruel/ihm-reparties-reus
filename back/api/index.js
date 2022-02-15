@@ -36,13 +36,14 @@ router.get('/image/:name', (req, res) => {
 });
 
 /**
- * Return link between 2 card
+ * Find path between two card
+ * Return all card and link between 2 card
+ * If no path exist return an empty array
  */
-router.get('/link/:id1/:id2', (req, res) => {
+router.get('/path/:id1/:id2', (req, res) => {
 
-    const link = Controller.findLinkBetweenCardId(parseInt(req.params.id1), parseInt(req.params.id2));
-    if(link === undefined) res.sendStatus(404);
-    else res.send(link);
+    const json = Controller.findPathBetweenCardId(parseInt(req.params.id1), parseInt(req.params.id2));
+    res.send(json);
 })
 
 /**
@@ -64,17 +65,13 @@ router.get('/cards/position/longitude/:lon/lattitude/:lat', (req, res) => {
     res.send(cards);
 })
 
+/**
+ * Return all cards and id directly linked to the given card id
+ */
 router.get('/cards/links/:id', (req, res) => {
     
     const cardId = parseInt(req.params.id);
-    const links = Controller.findLinksForId(cardId);
-    const cards = [];
-    for(let link of links){
-        let currentId = link.id1 == cardId ? link.id2 : link.id1;
-        let currentCard = Controller.findCardById(currentId);
-        cards.push(currentCard);
-    }
-    const json = {links:links, cards:cards};
+    const json = Controller.findAllLinkAndCardForAGivenCardId(cardId)
     res.send(json);
 })
 
