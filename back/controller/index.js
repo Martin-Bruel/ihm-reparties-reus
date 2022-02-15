@@ -50,18 +50,13 @@ function findLinkById(id){
 }
 
 /**
- * Find link between 2 cards
+ * Find all links between 2 cards
  * @param {*} cardId1 card id 1
  * @param {*} cardId2 card id 2
  * @returns link
  */
-function findLinkBetweenCardId(cardId1, cardId2){
-    return links.find((l) => (l.id1 === cardId1 && l.id2 === cardId2) || (l.id1 === cardId2 && l.id2 === cardId1));
-}
-
-//TODO implement call
-function findAllLinkedCard(cardId){
-
+function findLinksBetweenTwoCard(cardId1, cardId2){
+    
 }
 
 
@@ -70,15 +65,20 @@ function findAllCardPositions(){
 }
 
 function findCardsByPosition(position){
-    return cards.find((c) => c.positions == position);
+    return cards.filter((c) => c.positions == position);
 }
+
+function findLinksForId(id){
+    return links.filter((l) => l.id1 == id || l.id2 == id);
+}
+
 
 module.exports = {
     findAllCard,
     findLinkById,
     findCardById,
-    findLinkBetweenCardId,
-    findAllLinkedCard,
     findImagePathByName,
-    findAllCardPositions
+    findAllCardPositions,
+    findCardsByPosition,
+    findLinksForId
 }
