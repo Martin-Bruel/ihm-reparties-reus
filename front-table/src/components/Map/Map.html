@@ -9,8 +9,14 @@
             Toggle map
         </button>
     </div> -->
+  <!-- dragCards -->
   <span v-bind:class="[{ activeTopShadow: showShadow }, 'topShadow']"></span>
   <span v-bind:class="[{ activeLeftShadow: showShadow }, 'leftShadow']"></span>
+  <!-- BigNav -->
+  <span v-if="shadowBigNav == 'TOP'" v-bind:class="[{ activeTopShadowBigNav: true }, 'topShadow']"></span>
+  <span v-if="shadowBigNav == 'LEFT'" v-bind:class="[{ activeLeftShadowBigNav: true }, 'leftShadow']"></span>
+  <span v-if="shadowBigNav == 'BOTTOM'" v-bind:class="[{ activeBottomShadowBigNav: true }, 'bottomShadow']"></span>
+  <span v-if="shadowBigNav == 'RIGHT'" v-bind:class="[{ activeRightShadowBigNav: true }, 'rightShadow']"></span>
   <l-map
     z-index="0"
     v-if="showMap"
@@ -20,6 +26,7 @@
     style="z-index: 0; position: absolute;"
     @update:center="centerUpdate"
     @update:zoom="zoomUpdate"
+    @dblclick="moveToNextMarker($event)"
   >
     <l-tile-layer :url="url" :attribution="attribution" />
     <l-marker v-for="point, index in points" :key="point.id" :lat-lng="point.position"

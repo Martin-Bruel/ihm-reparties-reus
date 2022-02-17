@@ -2,6 +2,7 @@ import { latLng } from "leaflet";
 import { LMap, LIcon, LTileLayer, LMarker, LPopup, LTooltip } from "vue2-leaflet";
 import axios from 'axios';
 import Card from "../Card.vue";
+import PositionsSorts from "../../Services/PositionsSorts.js";
 export default {
     name: "Example",
     components: {
@@ -27,14 +28,16 @@ export default {
             currentCenter: latLng(47.41322, -1.219482),
             showParagraph: false,
             mapOptions: {
-                zoomSnap: 0.5
+                doubleClickZoom: false
             },
             points: [],
             showMap: true,
             modalOpen: false,
             showModal: false,
             detailedCards: [],
-            showShadow: false
+            showShadow: false,
+            shadowBigNav: null,
+            positionsSorts: PositionsSorts
         };
     },
     methods: {
@@ -66,7 +69,6 @@ export default {
             this.modalOpen = !this.modalOpen;
         },
         displayDetails(point, event){
-            
             axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/cards/position`, {lat:point.position.lat, lon:point.position.lng}).then(response => {
                 this.detailedCards = response.data
                 var alignement = 0
@@ -88,6 +90,41 @@ export default {
         },
         desactivateShadow(){
             this.showShadow = false;
+        },
+        moveToNextMarker(event){
+            let screenX = window.innerWidth
+            let screenY = window.innerHeight
+            let x = event.containerPoint.x
+            let y = event.containerPoint.y
+            if(x > 120 && y < 120){
+                console.log("TOP") 
+                this.shadowBigNav = "TOP"
+            }
+            else if(x > 120 && y+120 > screenY){
+                let lat = event.latlng.lat
+                let lng = event.latlng.lng
+                console.log("BOTTOM") 
+                this.shadowBigNav = "BOTTOM"
+                let sortedPositions = this.positionsSorts.sortOnBottom(lat, lng)
+                this.center = latLng(sortedPositions.position.lat,sortedPositions.position.lng)
+                console.log(sortedPositions)            }
+            else if (x < 120 && y > 120){
+                console.log("LEFT") 
+                this.shadowBigNav = "LEFT"
+                this.positionsSorts.sortOnLeft()
+            }
+            else if (x+120> screenX && y > 120){
+                console.log("RIGHT")
+                this.shadowBigNav = "RIGHT"
+                let lat = event.latlng.lat
+                let lng = event.latlng.lng
+                let sortedPositions = this.positionsSorts.sortOnRight(lat, lng)
+                this.center = latLng(sortedPositions.position.lat,sortedPositions.position.lng)
+                console.log(sortedPositions)
+            }          
+            console.log(screenX, screenY)
+            console.log(x,y)
+
         }
     },
     created(){
@@ -101,6 +138,7 @@ export default {
                     position: latLng(position.lat, position.lon)
                 })
             }
+            this.positionsSorts = new PositionsSorts(this.points)
         })
     }
 };

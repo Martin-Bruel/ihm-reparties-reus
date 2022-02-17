@@ -29,10 +29,43 @@ transform: translateY(1000px);
   pointer-events: none;
 }
 
+.bottomShadow {
+  width: 100%;
+  position:absolute;
+  height: 80px;
+  bottom:0;
+  z-index: 50;
+  pointer-events: none;
+}
+
+.rightShadow {
+  width: 80px;
+  position:absolute;
+  height: 100%;
+  right:0;
+  z-index: 1;
+  pointer-events: none;
+}
+
 .activeTopShadow {
   background: linear-gradient(rgba(0,0,0,1), rgba(0,0,0,0));
 }
 
 .activeLeftShadow {
   background: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
+}
+
+.activeTopShadowBigNav {
+  background: linear-gradient(rgba(0,255,0,1), rgba(0,255,0,0));
+}
+
+.activeLeftShadowBigNav {
+  background: linear-gradient(to right, rgba(0,255,0,1), rgba(0,255,0,0));
+}
+.activeBottomShadowBigNav {
+  background: linear-gradient(rgba(0,255,0,1), rgba(0,255,0,0));
+}
+
+.activeRightShadowBigNav {
+  background: linear-gradient(to left, rgba(0,255,0,1), rgba(0,255,0,0));
 }
