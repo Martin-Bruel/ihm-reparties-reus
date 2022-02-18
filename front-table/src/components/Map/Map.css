@@ -56,16 +56,25 @@ transform: translateY(1000px);
 }
 
 .activeTopShadowBigNav {
-  background: linear-gradient(rgba(0,255,0,1), rgba(0,255,0,0));
+  background: rgba(0,255,0,1);
 }
 
 .activeLeftShadowBigNav {
-  background: linear-gradient(to right, rgba(0,255,0,1), rgba(0,255,0,0));
+  background: rgba(0,255,0,1);
 }
 .activeBottomShadowBigNav {
-  background: linear-gradient(rgba(0,255,0,1), rgba(0,255,0,0));
+  background: rgba(0,255,0,1);
 }
 
 .activeRightShadowBigNav {
-  background: linear-gradient(to left, rgba(0,255,0,1), rgba(0,255,0,0));
+  background: rgba(0,255,0,1);
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-enter-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0
+}
+.fade-leave, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0
 }

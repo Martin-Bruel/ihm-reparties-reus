@@ -2,30 +2,18 @@ export default class PositionsSorts {
     constructor(positions) {
         this.positions = positions
     }
-    sortOnTop(){
-        console.log(this.positions)
-        this.positions.sort((a,b) => (a.position.lat > b.position.lat) ? 1 : ((b.position.lat > a.position.lat) ? -1 : 0))
-        console.log(this.positions.forEach(element => {
-            console.log(element.position.lat)
-        }))
-    }
-    sortOnLeft(){
-        console.log(this.positions)
-        this.positions.sort((a,b) => (a.position.lat < b.position.lat) ? 1 : ((b.position.lat < a.position.lat) ? -1 : 0))
-        console.log(this.positions.forEach(element => {
-            console.log(element.position.lat)
-        }))
-    }
-    sortOnRight(lattitude, longitude){
+    sortOnTop(lattitude, longitude){
         var tmpPositions = this.positions
         var resultPositions = []
-        // console.log(tmpPositions)
-        tmpPositions.sort((a,b) => (a.position.lng < b.position.lng) ? 1 : ((b.position.lng < a.position.lng) ? -1 : 0))
+        console.log(lattitude, longitude)
+        tmpPositions.sort((a,b) => (a.position.lat < b.position.lat) ? 1 : ((b.position.lat < a.position.lat) ? -1 : 0))
+        console.log(tmpPositions)
         var minimumDistance = 10
-        tmpPositions.forEach((element) => {
-            // console.log(element.position.lng)
-            if (element.position.lng > longitude){
-                if(this.findAngle({lat:lattitude, lng: longitude+5},{lat:lattitude, lng: longitude}, element.position) < 50){
+        for (let element of tmpPositions) {
+            console.log(element.position.lat)
+            if (element.position.lat > lattitude){
+                console.log("angle : ",this.findAngle({lat:lattitude+5, lng: longitude},{lat:lattitude, lng: longitude}, element.position))
+                if(Math.abs(this.findAngle({lat:lattitude+5, lng: longitude},{lat:lattitude, lng: longitude}, element.position)) < 90){
                     // console.log("Angle : ", this.findAngle({lat:lattitude, lng: longitude+5},{lat:lattitude, lng: longitude}, element.position))
                     var currentDistance = Math.sqrt((lattitude - element.position.lat)**2 + (longitude - element.position.lng)**2)
                     // console.log("currentDistance : ", currentDistance)
@@ -34,24 +22,26 @@ export default class PositionsSorts {
                         resultPositions = element
                         // console.log("Distance entre A et B : ",Math.sqrt((lattitude - element.position.lat)**2 + (longitude - element.position.lng)**2))
                     }
+                } else if(resultPositions != null) {
+                    console.log("bijour")
+                    break
                 }
             }
-        })
+        }
         // console.log(tmpPositions)
         return resultPositions
     }
-    sortOnBottom(lattitude, longitude){
+    sortOnLeft(lattitude, longitude){
         var tmpPositions = this.positions
         var resultPositions = []
-        tmpPositions.sort((a,b) => (a.position.lng > b.position.lng) ? 1 : ((b.position.lng > a.position.lng) ? -1 : 0))
+        console.log(lattitude,longitude)
+        tmpPositions.sort((a,b) => (a.position.lng < b.position.lng) ? 1 : ((b.position.lng < a.position.lng) ? -1 : 0))
         var minimumDistance = 10
-        tmpPositions.forEach((element) => {
-            console.log(element.position.lng)
-            console.log(element.position.lng," < ", longitude)
+        for (let element of tmpPositions) {
+            // console.log(element.position.lng)
             if (element.position.lng < longitude){
-                console.log("Angle : ", this.findAngle({lat:lattitude, lng: longitude-5},{lat:lattitude, lng: longitude}, element.position))
-                if(this.findAngle({lat:lattitude, lng: longitude-5},{lat:lattitude, lng: longitude}, element.position) < 90){
-                    console.log("Angle : ", this.findAngle({lat:lattitude, lng: longitude+5},{lat:lattitude, lng: longitude}, element.position))
+                if(Math.abs(this.findAngle( element.position,{lat:lattitude, lng: longitude},{lat:lattitude, lng: longitude-5})) < 90){
+                    // console.log("Angle : ", this.findAngle({lat:lattitude, lng: longitude+5},{lat:lattitude, lng: longitude}, element.position))
                     var currentDistance = Math.sqrt((lattitude - element.position.lat)**2 + (longitude - element.position.lng)**2)
                     // console.log("currentDistance : ", currentDistance)
                     if(currentDistance < minimumDistance){
@@ -59,9 +49,68 @@ export default class PositionsSorts {
                         resultPositions = element
                         // console.log("Distance entre A et B : ",Math.sqrt((lattitude - element.position.lat)**2 + (longitude - element.position.lng)**2))
                     }
+                } else if(resultPositions != null) {
+                    console.log("bijour")
+                    break
                 }
             }
-        })
+        }
+        // console.log(tmpPositions)
+        return resultPositions
+    }
+    sortOnRight(lattitude, longitude){
+        var tmpPositions = this.positions
+        var resultPositions = []
+        // console.log(tmpPositions)
+        tmpPositions.sort((a,b) => (a.position.lng < b.position.lng) ? 1 : ((b.position.lng < a.position.lng) ? -1 : 0))
+        var minimumDistance = 10
+        for (let element of tmpPositions) {
+            // console.log(element.position.lng)
+            if (element.position.lng > longitude){
+                if(Math.abs(this.findAngle({lat:lattitude, lng: longitude+5},{lat:lattitude, lng: longitude}, element.position)) < 90){
+                    // console.log("Angle : ", this.findAngle({lat:lattitude, lng: longitude+5},{lat:lattitude, lng: longitude}, element.position))
+                    var currentDistance = Math.sqrt((lattitude - element.position.lat)**2 + (longitude - element.position.lng)**2)
+                    // console.log("currentDistance : ", currentDistance)
+                    if(currentDistance < minimumDistance){
+                        minimumDistance = currentDistance
+                        resultPositions = element
+                        // console.log("Distance entre A et B : ",Math.sqrt((lattitude - element.position.lat)**2 + (longitude - element.position.lng)**2))
+                    }
+                } else if(resultPositions != null) {
+                    console.log("bijour")
+                    break
+                }
+            }
+        }
+        // console.log(tmpPositions)
+        return resultPositions
+    }
+    sortOnBottom(lattitude, longitude){
+        var tmpPositions = this.positions
+        var resultPositions = []
+        console.log(lattitude, longitude)
+        tmpPositions.sort((a,b) => (a.position.lat > b.position.lat) ? 1 : ((b.position.lat > a.position.lat) ? -1 : 0))
+        console.log(tmpPositions)
+        var minimumDistance = 10
+        for (let element of tmpPositions) {
+            console.log(element.position.lat)
+            if (element.position.lat < lattitude){
+                console.log("angle : ",this.findAngle({lat:lattitude-5, lng: longitude},{lat:lattitude, lng: longitude}, element.position))
+                if(Math.abs(this.findAngle({lat:lattitude-5, lng: longitude},{lat:lattitude, lng: longitude}, element.position)) < 90){
+                    // console.log("Angle : ", this.findAngle({lat:lattitude, lng: longitude+5},{lat:lattitude, lng: longitude}, element.position))
+                    var currentDistance = Math.sqrt((lattitude - element.position.lat)**2 + (longitude - element.position.lng)**2)
+                    // console.log("currentDistance : ", currentDistance)
+                    if(currentDistance < minimumDistance){
+                        minimumDistance = currentDistance
+                        resultPositions = element
+                        // console.log("Distance entre A et B : ",Math.sqrt((lattitude - element.position.lat)**2 + (longitude - element.position.lng)**2))
+                    }
+                } else if(resultPositions != null) {
+                    console.log("bijour")
+                    break
+                }
+            }
+        }
         // console.log(tmpPositions)
         return resultPositions
     }

@@ -13,10 +13,18 @@
   <span v-bind:class="[{ activeTopShadow: showShadow }, 'topShadow']"></span>
   <span v-bind:class="[{ activeLeftShadow: showShadow }, 'leftShadow']"></span>
   <!-- BigNav -->
-  <span v-if="shadowBigNav == 'TOP'" v-bind:class="[{ activeTopShadowBigNav: true }, 'topShadow']"></span>
-  <span v-if="shadowBigNav == 'LEFT'" v-bind:class="[{ activeLeftShadowBigNav: true }, 'leftShadow']"></span>
-  <span v-if="shadowBigNav == 'BOTTOM'" v-bind:class="[{ activeBottomShadowBigNav: true }, 'bottomShadow']"></span>
-  <span v-if="shadowBigNav == 'RIGHT'" v-bind:class="[{ activeRightShadowBigNav: true }, 'rightShadow']"></span>
+  <transition style="transition-delay: 1s;" v-if="shadowBigNav == 'TOP'" name="fade" mode="in-out">
+    <span v-bind:class="[{ activeTopShadowBigNav: true }, 'topShadow']"></span>
+  </transition>
+  <transition style="transition-delay: 1s;" v-if="shadowBigNav == 'LEFT'" name="fade" mode="in-out">
+    <span v-bind:class="[{ activeLeftShadowBigNav: true }, 'leftShadow']"></span>
+  </transition>
+  <transition style="transition-delay: 1s;" v-if="shadowBigNav == 'BOTTOM'" name="fade" mode="in-out">
+    <span v-bind:class="[{ activeBottomShadowBigNav: true }, 'bottomShadow']"></span>
+  </transition>
+  <transition style="transition-delay: 1s;" v-if="shadowBigNav == 'RIGHT'" name="fade" mode="in-out">
+    <span v-bind:class="[{ activeRightShadowBigNav: true }, 'rightShadow']"></span>
+  </transition>
   <l-map
     z-index="0"
     v-if="showMap"
