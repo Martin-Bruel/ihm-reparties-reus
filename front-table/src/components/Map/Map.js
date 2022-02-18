@@ -98,13 +98,14 @@ export default {
             let y = event.containerPoint.y
             if(x > 120 && y < 120){
                 console.log("TOP") 
-                this.shadowBigNav = "TOP"
                 let lat = event.latlng.lat
                 let lng = event.latlng.lng
                 let sortedPositions = this.positionsSorts.sortOnTop(lat, lng)
-                console.log("on est top : ",sortedPositions)
                 if(sortedPositions.length != 0){
+                    this.shadowBigNav = "TOP"
                     this.center = latLng(sortedPositions.position.lat,sortedPositions.position.lng)
+                } else {
+                    this.shadowBigNav = "TOPNONE"
                 }
                 console.log(sortedPositions)
             }
@@ -112,30 +113,36 @@ export default {
                 let lat = event.latlng.lat
                 let lng = event.latlng.lng
                 console.log("BOTTOM") 
-                this.shadowBigNav = "BOTTOM"
                 let sortedPositions = this.positionsSorts.sortOnBottom(lat, lng)
                 if(sortedPositions.length != 0){
+                    this.shadowBigNav = "BOTTOM"
                     this.center = latLng(sortedPositions.position.lat,sortedPositions.position.lng)
+                } else {
+                    this.shadowBigNav = "BOTTOMNONE"
                 }
                 console.log(sortedPositions)            }
             else if (x < 120 && y > 120){
                 console.log("LEFT") 
-                this.shadowBigNav = "LEFT"
                 let lat = event.latlng.lat
                 let lng = event.latlng.lng
                 let sortedPositions = this.positionsSorts.sortOnLeft(lat, lng)
                 if(sortedPositions.length != 0){
+                    this.shadowBigNav = "LEFT"
                     this.center = latLng(sortedPositions.position.lat,sortedPositions.position.lng)
+                } else {
+                    this.shadowBigNav = "LEFTNONE"
                 }
                 console.log(sortedPositions)            }
             else if (x+120> screenX && y > 120){
                 console.log("RIGHT")
-                this.shadowBigNav = "RIGHT"
                 let lat = event.latlng.lat
                 let lng = event.latlng.lng
                 let sortedPositions = this.positionsSorts.sortOnRight(lat, lng)
                 if(sortedPositions.length != 0){
+                    this.shadowBigNav = "RIGHT"
                     this.center = latLng(sortedPositions.position.lat,sortedPositions.position.lng)
+                } else {
+                    this.shadowBigNav = "RIGHTNONE"
                 }
                 console.log(sortedPositions)
             }          

@@ -50,7 +50,6 @@ transform: translateY(1000px);
 .activeTopShadow {
   background: linear-gradient(rgba(0,0,0,1), rgba(0,0,0,0));
 }
-
 .activeLeftShadow {
   background: linear-gradient(to right, rgba(0,0,0,1), rgba(0,0,0,0));
 }
@@ -58,17 +57,29 @@ transform: translateY(1000px);
 .activeTopShadowBigNav {
   background: rgba(0,255,0,1);
 }
-
 .activeLeftShadowBigNav {
   background: rgba(0,255,0,1);
 }
 .activeBottomShadowBigNav {
   background: rgba(0,255,0,1);
 }
-
 .activeRightShadowBigNav {
   background: rgba(0,255,0,1);
 }
+
+.noneTopShadowBigNav {
+  background: rgba(255,0,0,1);
+}
+.noneLeftShadowBigNav {
+  background: rgba(255,0,0,1);
+}
+.noneBottomShadowBigNav {
+  background: rgba(255,0,0,1);
+}
+.noneRightShadowBigNav {
+  background: rgba(255,0,0,1);
+}
+
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
 }
