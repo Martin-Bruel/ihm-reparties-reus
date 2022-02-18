@@ -38,6 +38,20 @@ router.get('/image/:name', (req, res) => {
     else res.sendFile(path);
 });
 
+
+/**
+ * Return video with the specific name
+ */
+ router.get('/video/:name', (req, res) => {
+
+    const imageName = req.params.name
+    const path = Controller.streamVideoByName(imageName);
+    console.log('Get iamge: ' + imageName)
+
+    if (path === undefined)  res.sendStatus(404);
+    else res.sendFile(path);
+});
+
 /**
  * Find path between two card
  * Return all card and link between 2 card
