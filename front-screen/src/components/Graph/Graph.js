@@ -1,7 +1,6 @@
 import Card from '../Card.vue'
 import LeaderLine from 'leader-line-vue';
 import axios from 'axios';
-import Vue from 'vue'
 
 export default {
   name: 'Graph',
@@ -79,13 +78,6 @@ export default {
             }
           })
         }, 100)
-      },
-      holdLink (position){
-        return function() {
-          console.log(position)
-          console.log(Vue.prototype.$screenId)
-          axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/table/position/${Vue.prototype.$screenId}`, {lat: position.lat, lon: position.lon})
-        }
       },
       addCard () {
           this.cards.push(this.generateCardContent());

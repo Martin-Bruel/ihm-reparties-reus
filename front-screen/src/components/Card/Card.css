@@ -10,6 +10,32 @@
     border-radius: 15px;
 }
 
+.menu {
+    display: none;
+    position: absolute;
+    left: 16rem;
+    background: whitesmoke;
+    color: black;
+    text-align: center;
+    padding: 0.5rem;
+    width: 11rem;
+    border: 1px black solid;
+    transition: all .1s ease-in-out;
+    border-radius: 3px;
+}
+
+.menuActive {
+    display: inline-block;
+}
+
+.separator {
+    height: 3px;
+    display: block;
+    margin-left: 5%;
+    width: 90%;
+    background-color: grey;
+}
+
 .card h1, .card h3 {
     color: black;
 }
