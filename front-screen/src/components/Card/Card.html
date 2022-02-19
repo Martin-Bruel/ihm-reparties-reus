@@ -9,28 +9,28 @@
     </div>
     <div v-bind:class="[{ menuActive: isMenuActive }, 'menu']">
         <span v-touch:tap="expandCardNode" style="display: flex; flex-direction: row; align-items: center;">
-            <img src="../../assets/simple-expand.svg" width="27px"></img>
-            <h3 style="margin: 0.5rem; margin-left:0;">Étendre les liens</h3>
-        </span>
-        <span class="separator"></span>
-        <span style="display: flex; flex-direction: row; align-items: center;">
-            <img src="../../assets/multi-expand.svg" width="27px"></img>
-            <h3 style="margin: 0.5rem; margin-left:0;">Étendre tous les liens</h3>
-        </span>
-        <span class="separator"></span>
-        <span v-if="hasPosition" v-touch:tap="requestPosition" style="display: flex; flex-direction: row; align-items: center;">
-            <img src="../../assets/position.png" width="27px"></img>
-            <h3 style="margin: 0.5rem; margin-left:0;">Demander position</h3>
-        </span>
-        <span v-if="hasPosition" class="separator"></span>
-        <span style="display: flex; flex-direction: row; align-items: center;">
-            <img src="../../assets/trash.svg" width="27px"></img>
-            <h3 style="margin: 0.5rem; margin-left:0;">Supprimer carte</h3>
+            <img src="../../assets/simple-expand.svg" width="13px"></img>
+            <h3 class="menu-title">Étendre les liens</h3>
         </span>
         <span class="separator"></span>
         <span v-touch:tap="desactivateMenu" style="display: flex; flex-direction: row; align-items: center;">
-            <img src="../../assets/close-icon.svg" width="27px"></img>
-            <h3 style="margin: 0.5rem; margin-left:0;">Fermer menu</h3>
+            <img src="../../assets/multi-expand.svg" width="13px"></img>
+            <h3 class="menu-title">Étendre tous les liens</h3>
+        </span>
+        <span class="separator"></span>
+        <span v-if="hasPosition" v-touch:tap="requestPosition" style="display: flex; flex-direction: row; align-items: center;">
+            <img src="../../assets/position.png" width="13px"></img>
+            <h3 class="menu-title">Demander position</h3>
+        </span>
+        <span v-if="hasPosition" class="separator"></span>
+        <span v-touch:tap="removeCardNode" style="display: flex; flex-direction: row; align-items: center;">
+            <img src="../../assets/trash.svg" width="13px"></img>
+            <h3 class="menu-title">Supprimer carte</h3>
+        </span>
+        <span class="separator"></span>
+        <span v-touch:tap="desactivateMenu" style="display: flex; flex-direction: row; align-items: center;">
+            <img src="../../assets/close-icon.svg" width="13px"></img>
+            <h3 class="menu-title">Fermer menu</h3>
         </span>
     </div>
 </div>

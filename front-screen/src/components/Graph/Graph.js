@@ -13,6 +13,7 @@ export default {
         linkIds: [],
         lines: [],
         holdingCards: [],
+        edges: []
       }   
   },
   mounted() {
@@ -47,6 +48,19 @@ export default {
           }
         }
       },
+      removeCard(id){
+        this.cards = this.cards.filter(item => item.id !== id)
+        this.edges.map((e, i)=> {
+          if (e.id1 === id || e.id2 === id){
+            this.lines[i].remove()
+            this.lines[i] = null
+            this.edges[i] = null
+            this.linkIds = this.linkIds.filter(linkId => linkId !== e.id)
+          }
+        })
+        this.lines = this.lines.filter((l)=> l !== null)
+        this.edges = this.edges.filter((e)=> e !== null)
+      },
       expandNode(id){
         console.log("FETCH EXPAND NODES : "+id)
         axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/cards/links/`+id).then(response => {
@@ -55,7 +69,6 @@ export default {
         })
       },
       showMultipleElements(nodes, edges){
-        console.log(nodes, edges)
         nodes.map((n)=>{
           if (this.cards.filter(item => item.id === n.id).length === 0)
             this.cards.push(n)
@@ -63,6 +76,7 @@ export default {
         setTimeout(()=>{
           edges.map((e)=>{
             if (!this.linkIds.includes(e.id)){
+              this.edges.push({id1: e.id1, id2: e.id2, id: e.id})
               const card1Ref = document.getElementById("card"+e.id1)
               const card2Ref = document.getElementById("card"+e.id2)
               this.lines.push(LeaderLine.setLine(
@@ -72,7 +86,8 @@ export default {
                   startPlug: 'behind', 
                   endPlug: 'behind',
                   color: 'white',
-                  middleLabel: LeaderLine.obj.captionLabel(e.title, {color: '#f8f9fa', outlineColor: '#212529', fontSize: '1.3rem', fontFamily: 'Avenir, Helvetica, Arial, sans-serif'})
+                  size: 2,
+                  middleLabel: LeaderLine.obj.captionLabel(e.title, {color: '#f8f9fa', outlineColor: '#212529', fontSize: '0.65rem', fontFamily: 'Avenir, Helvetica, Arial, sans-serif'})
                 }
               ));
             }

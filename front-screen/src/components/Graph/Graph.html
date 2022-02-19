@@ -8,6 +8,7 @@
                     v-touch:touchhold="holdCard(card.id, holdingCards, showMultipleElements)"
                     v-touch:end="releaseCard(card.id, holdingCards)"
                     v-bind:expandNode="expandNode"
+                    v-bind:removeCard="removeCard"
                     v-bind:id="card.id" 
                     v-bind:title="card.title" 
                     v-bind:subtitle="card.subtitle" 

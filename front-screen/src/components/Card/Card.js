@@ -9,11 +9,12 @@ export default {
       title: String,
       subtitle: String,
       flag: String,
-      positions: Object,
+      positions: Array,
       content: String,
       img: String,
       type: String,
-      expandNode: Function
+      expandNode: Function,
+      removeCard: Function
     },
     data () {
       return {
@@ -38,25 +39,30 @@ export default {
           this.isMenuActive = false
         },
         expandCardNode(){
+          this.desactivateMenu()
           this.expandNode(this.id)
         },
+        removeCardNode(){
+          this.desactivateMenu()
+          this.removeCard(this.id)
+        },
         detectDoubleTap() {
-          this.counter++ 
-            if(this.counter !== 1) {
-                this.timer = setTimeout(function() {
-                    this.counter = 0
-                }, 500); 
+            if(this.counter === 1) {
+              this.counter = 0
+              this.activateMenu();
             }else{
+              this.counter++
+              setTimeout(() => {
                 this.counter = 0
-                this.activateMenu();
+              },300); 
             }
         },
         requestPosition(){
-          axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/table/position/${Vue.prototype.$screenId}`, {lat: this.position[0].lat, lon: this.position[0].lon})
+          this.desactivateMenu()
+          axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/table/position/${Vue.prototype.$screenId}`, {lat: this.positions[0].lat, lon: this.positions[0].lon})
         }
     },
     mounted() {
-      console.log(this.position)
       if (this.positions.length > 0)
         this.hasPosition = true
     }
