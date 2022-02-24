@@ -4,6 +4,9 @@ import axios from 'axios';
 import Card from "../Card.vue";
 export default {
     name: "Example",
+    props: {
+        positionNotification: null
+    },
     components: {
         LMap,
         LTileLayer,
@@ -91,6 +94,12 @@ export default {
         }
     },
     created(){
+    },
+    updated(){
+        if(){
+            
+        }
+        console.log("positionNotification : ",this.positionNotification)
     },
     mounted(){
         axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/positions`).then(response => {
