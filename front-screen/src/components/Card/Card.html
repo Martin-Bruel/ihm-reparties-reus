@@ -13,9 +13,9 @@
             <h3 class="menu-title">Étendre les liens</h3>
         </span>
         <span class="separator"></span>
-        <span v-touch:tap="desactivateMenu" style="display: flex; flex-direction: row; align-items: center;">
+        <span v-touch:tap="expandAllCardLinks" style="display: flex; flex-direction: row; align-items: center;">
             <img src="../../assets/multi-expand.svg" width="13px"></img>
-            <h3 class="menu-title">Étendre tous les liens</h3>
+            <h3 class="menu-title">Afficher tous les liens</h3>
         </span>
         <span class="separator"></span>
         <span v-if="hasPosition" v-touch:tap="requestPosition" style="display: flex; flex-direction: row; align-items: center;">

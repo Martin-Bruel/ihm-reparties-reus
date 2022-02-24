@@ -14,6 +14,7 @@ export default {
       img: String,
       type: String,
       expandNode: Function,
+      expandAllLinks: Function,
       removeCard: Function
     },
     data () {
@@ -41,6 +42,10 @@ export default {
         expandCardNode(){
           this.desactivateMenu()
           this.expandNode(this.id)
+        },
+        expandAllCardLinks(){
+          this.desactivateMenu()
+          this.expandAllLinks()
         },
         removeCardNode(){
           this.desactivateMenu()
