@@ -67,10 +67,9 @@ router.get('/path/:id1/:id2', (req, res) => {
 })
 
 /**
- * Return all position find
+ * Return all card positions
  */
 router.get('/positions', (req, res) => {
-
     const positions = Controller.findAllCardPositions();
     console.log('Get all positons')
     res.send(positions);
@@ -112,6 +111,21 @@ router.post('/links', (req, res) => {
 
 /**
  * Send position to table
+=======
+}
+
+/**
+ * Return all cards from a given position
+ */
+router.get('/cards/position/longitude/:lon/lattitude/:lat', (req, res) => {
+
+    const position = {lon:req.params.lon,lat:req.params.lon};
+    const cards = Controller.findCardsByPosition(position);
+    res.send(cards)
+})
+
+/**
+ * Send message to table and specifie the id
  */
 router.post('/table/position/:id', (req, res) => {
 

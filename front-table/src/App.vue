@@ -1,11 +1,14 @@
 <template>
-  <Map @on-move="onMove"/>
+  <div>
+    <Map :positionNotification="positionNotification"  @on-move="onMove"/>
+    <Notification v-if="notification == true" @accept-modal="acceptModal" @close-modal="closeModal"/>
+  </div>
 </template>
 
 <script>
-// import Socket from './components/Socket.vue'
-// import Card from './components/Card.vue'
+import { latLng } from "leaflet";
 import Map from './components/Map.vue'
+import Notification from './components/Notification.vue'
 
 export default {
   data(){
@@ -18,16 +21,25 @@ export default {
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
       zoom: 15,
       center: [51.505, -0.159],
-      markerLatLng: [51.504, -0.159]
+      markerLatLng: [51.504, -0.159],
+      notification: false,
+      positionNotification: null,
+      result: null
     }
   },  
   name: 'App',
   components: {
-    // Socket,
-    // Card,
+    Notification,
     Map,
   },
   methods: {
+    closeModal(){
+      this.notification = false
+    },
+    acceptModal(){
+      this.positionNotification = latLng(this.result.message.lat,this.result.message.lon)
+      this.notification = false
+    },
     onMove(cards, id, event){
 
       let y = event.detail.event.screenY
@@ -65,6 +77,9 @@ export default {
       // Vue data binding means you don't need any extra work to
       // update your UI. Just set the `time` and Vue will automatically
       // update the `<h2>`.
+      this.notification = true
+      this.result = JSON.parse(event.data)
+      this.positionNotification = latLng(this.result.message.lat,this.result.message.lon)
       this.messages.push(event.data);
       //this.messages;
     };

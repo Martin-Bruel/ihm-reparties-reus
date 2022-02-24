@@ -1,0 +1,13 @@
+<transition name="modal-fade">
+  <div class="modal-overlay" @click="$emit('close-modal')">
+    <div class="modal" @click.stop>
+      <h1 style="margin-bottom: 5%; font-family: helvetica;">Ecran 1</h1>
+      <h1 style="margin-bottom: 5%; font-family: helvetica;">demande le contrôle</h1>
+      <button @click="$emit('accept-modal')" class="button-2" style="background: #eec50d;">Autoriser</button>      
+      <button @click="$emit('close-modal')" class="button-2" style="background: #d1cebf;">Refuser</button>
+    </div>
+    <div class="close" @click="$emit('close-modal')">
+      <img class="close-img" src="../../assets/close-box.png" alt="" />
+    </div>
+  </div>
+</transition>

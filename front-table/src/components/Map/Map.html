@@ -62,6 +62,13 @@
         icon-url="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/map-marker-icon.png"
       />
     </l-marker>
+    <l-marker v-if="positionNotification != null" :lat-lng="positionNotification">
+      <l-icon
+        :icon-size="[40,40]"
+        :icon-anchor="[20, 40]"
+        icon-url="http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/map-marker-icon.png"
+      />
+    </l-marker>
   </l-map>
   <transition-group name="list" tag="p" style="margin: 0;">
     <div v-touch:start="activateShadow" v-touch:end="desactivateShadow" @stop="onMove(card.id, $event)" v-for="card in detailedCards" :key="card.id" v-draggable :style="{'z-index': 500,'position': 'absolute', 'left': card.positionX+'px', 'top': card.positionY+'px' }">

@@ -68,6 +68,15 @@ export default {
           this.showMultipleElements(res.cards, res.links)
         })
       },
+      expandAllLinks(){
+        console.log("FETCH EXPAND ALL LINKS : ")
+        //Create array of card Ids
+        let ids = this.cards.map((c)=>c.id)
+        axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/links/`, ids).then(response => {
+          const res = response.data
+          this.showMultipleElements([], res)
+        })
+      },
       showMultipleElements(nodes, edges){
         nodes.map((n)=>{
           if (this.cards.filter(item => item.id === n.id).length === 0)
