@@ -9,8 +9,38 @@
             Toggle map
         </button>
     </div> -->
+  <!-- dragCards -->
   <span v-bind:class="[{ activeTopShadow: showShadow }, 'topShadow']"></span>
   <span v-bind:class="[{ activeLeftShadow: showShadow }, 'leftShadow']"></span>
+  <!-- BigNav -->
+  <!-- TOP -->
+  <transition style="transition-delay: 1s;" v-if="shadowBigNav == 'TOP'" name="fade" mode="in-out">
+    <span v-bind:class="[{ activeTopShadowBigNav: true }, 'topShadow']"></span>
+  </transition>
+  <transition style="transition-delay: 1s;" v-if="shadowBigNav == 'TOPNONE'" name="fade" mode="in-out">
+    <span v-bind:class="[{ noneTopShadowBigNav: true }, 'topShadow']"></span>
+  </transition>
+  <!-- LEFT -->
+  <transition style="transition-delay: 1s;" v-if="shadowBigNav == 'LEFT'" name="fade" mode="in-out">
+    <span v-bind:class="[{ activeLeftShadowBigNav: true }, 'leftShadow']"></span>
+  </transition>
+  <transition style="transition-delay: 1s;" v-if="shadowBigNav == 'LEFTNONE'" name="fade" mode="in-out">
+    <span v-bind:class="[{ noneLeftShadowBigNav: true }, 'leftShadow']"></span>
+  </transition>
+  <!-- BOTTOM -->
+  <transition style="transition-delay: 1s;" v-if="shadowBigNav == 'BOTTOM'" name="fade" mode="in-out">
+    <span v-bind:class="[{ activeBottomShadowBigNav: true }, 'bottomShadow']"></span>
+  </transition>
+  <transition style="transition-delay: 1s;" v-if="shadowBigNav == 'BOTTOMNONE'" name="fade" mode="in-out">
+    <span v-bind:class="[{ noneBottomShadowBigNav: true }, 'bottomShadow']"></span>
+  </transition>
+  <!-- RIGHT -->
+  <transition style="transition-delay: 1s;" v-if="shadowBigNav == 'RIGHT'" name="fade" mode="in-out">
+    <span v-bind:class="[{ activeRightShadowBigNav: true }, 'rightShadow']"></span>
+  </transition>
+  <transition style="transition-delay: 1s;" v-if="shadowBigNav == 'RIGHTNONE'" name="fade" mode="in-out">
+    <span v-bind:class="[{ noneRightShadowBigNav: true }, 'rightShadow']"></span>
+  </transition>
   <l-map
     z-index="0"
     v-if="showMap"
@@ -20,6 +50,7 @@
     style="z-index: 0; position: absolute;"
     @update:center="centerUpdate"
     @update:zoom="zoomUpdate"
+    @dblclick="moveToNextMarker($event)"
   >
     <l-tile-layer :url="url" :attribution="attribution" />
     <l-marker v-for="point, index in points" :key="point.id" :lat-lng="point.position"
