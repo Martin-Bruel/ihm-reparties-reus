@@ -171,14 +171,40 @@ function findLinksForId(id){
 }
 
 function findAllLinkAndCardForAGivenCardId(cardId){
-    const links = findLinksForId(cardId);
+    const findLinks = findLinksForId(cardId);
     const cards = [];
-    for(let link of links){
+    for(let link of findLinks){
         let currentId = link.id1 == cardId ? link.id2 : link.id1;
         let currentCard = findCardById(currentId);
         cards.push(currentCard);
     }
-    return {links:links, cards:cards};
+    return {links:findLinks, cards:cards};
+}
+
+function findAllLinksBetweenCardIds(cardIds){
+    
+    const findLinks = []
+    const idsProcessed = []
+    
+    for(id of cardIds){
+
+        idsProcessed.push(id)
+        for(idToCheck of cardIds){
+
+            if(!idsProcessed.includes(idToCheck)){
+                
+                for(let link of findLinksForId(id)){
+
+                    if(link.id1 === idToCheck || link.id2 === idToCheck){
+                        
+                        findLinks.push(link)
+                    }
+                }
+            }
+        }
+    }
+    return findLinks
+
 }
 
 
@@ -192,5 +218,6 @@ module.exports = {
     findLinksForId,
     findAllLinkAndCardForAGivenCardId,
     findPathBetweenCardId,
-    streamVideoByName
+    streamVideoByName,
+    findAllLinksBetweenCardIds
 }

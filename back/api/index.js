@@ -97,6 +97,17 @@ router.get('/cards/links/:id', (req, res) => {
     res.send(json);
 })
 
+/**
+ * Return all links between cardsId
+ */
+router.post('/links', (req, res) => {
+
+    const cardIds = req.body
+    const json = Controller.findAllLinksBetweenCardIds(cardIds)
+    console.log('Get all link for cards')
+    res.send(json)
+})
+
 
 /**
  * Send position to table
