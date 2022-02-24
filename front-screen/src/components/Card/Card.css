@@ -2,12 +2,38 @@
     display: inline-block;
     background: whitesmoke;
     text-align: center;
-    padding: 1rem;
-    margin: 1rem;
-    width: 12rem;
-    border: 1px black solid;
+    padding: 0.5rem;
+    margin: 0.5rem;
+    width: 6rem;
+    border: 0.5px black solid;
     transition: all .1s ease-in-out;
     border-radius: 15px;
+}
+
+.menu {
+    display: none;
+    position: absolute;
+    left: 8rem;
+    background: whitesmoke;
+    color: black;
+    text-align: center;
+    padding: 0.25rem;
+    width: 5.5rem;
+    border: 0.5px black solid;
+    transition: all .1s ease-in-out;
+    border-radius: 3px;
+}
+
+.menuActive {
+    display: inline-block;
+}
+
+.separator {
+    height: 1.5px;
+    display: block;
+    margin-left: 5%;
+    width: 90%;
+    background-color: grey;
 }
 
 .card h1, .card h3 {
@@ -28,25 +54,31 @@
 }
 
 h1.title {
-    margin: .5rem;
-    font-size: 1.5rem;
+    margin: .25rem;
+    font-size: 0.75rem;
 }
 
 h3.subtitle {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: .8rem;
+    font-size: .4rem;
+}
+
+h3.menu-title {
+    margin: 0.25rem;
+    margin-left:0;
+    font-size: 0.6rem;
 }
 
 img.flag {
-    width: 1.5rem;
-    height: 1rem;
-    margin-right: 0.4rem;
+    width: 0.75rem;
+    height: 0.5rem;
+    margin-right: 0.2rem;
 }
 
 p.content {
-    font-size: .8rem;
+    font-size: .4rem;
     color: gray;
 
     overflow: hidden;
@@ -58,11 +90,11 @@ p.content {
 }
 
 img.picture {
-    width: 4rem;
-    height: 4rem;
+    width: 2rem;
+    height: 2rem;
 }
 
 img.bigPicture {
-    width: 6rem;
-    height: 6rem;
+    width: 3rem;
+    height: 3rem;
 }

@@ -45,7 +45,8 @@ export default {
         axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/card/`+card['id']).then(response => {
           let res = response.data
           console.log(res)
-          this.cards.push(res)
+          if (this.cards.filter(item => item.id === res.id).length === 0)
+            this.cards.push(res)
         })
         this.time = event.data;
       }

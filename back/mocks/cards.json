@@ -64,20 +64,25 @@
         "type":"place",
         "title": "Garage de Pedro",
         "content": "Exemple de lien entre Clemindile et pablo",
-        "position": {
-            "lat": 43.589848, 
-            "lon": 7.123432
-        }
+        "positions": [
+            {
+                "lat": 43.589848, 
+                "lon": 7.123432
+            }
+        ]
     },
     {
         "id":4,
         "type":"place",
         "title": "Cartel de Madeline",
         "content": "Exemple de lien entre François et Pablo",
-        "position": {
-            "lat": 43.615828,
-            "lon": 7.072713
-        }
+        "positions": 
+        [
+            {
+                "lat": 43.615828,
+                "lon": 7.072713
+            }
+        ]
     },
     {
         "id":5,
@@ -85,10 +90,12 @@
         "title": "Vente de produits",
         "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nibh sagittis, vestibulum elit vitae, venenatis justo. Duis vel leo a risus tincidunt tincidunt eu a orci. Pellentesque sagittis maximus nisi a euismod. Phasellus nec velit dui",
         "date":"14/02/2022",
-        "position": {
-            "lat": 43.615828,
-            "lon": 7.072713
-        }
+        "positions": [
+                {
+                "lat": 43.615828,
+                "lon": 7.072713
+            }
+        ]
     },
     {
         "id":6,
@@ -96,10 +103,12 @@
         "title": "Pablo Escrobar Image 1",
         "img": "IMG-20211021-WA0005.jpg",
         "date":"16/02/2022",
-        "position":{
-            "lat":43.587796, 
-            "lon":7.072049
-        }
+        "positions":[
+            {
+                "lat":43.587796, 
+                "lon":7.072049
+            }
+        ]
     },
     {
         "id":7,
@@ -107,10 +116,12 @@
         "title": "Pablo Escrobar Image 2",
         "img": "IMG-20211021-WA0001.jpg",
         "date":"16/02/2022",
-        "position":{
-            "lat":43.587796, 
-            "lon":7.072049
-        }
+        "positions":[
+            {
+                "lat":43.587796, 
+                "lon":7.072049
+            }
+        ]
     },
     {
         "id":8,
@@ -118,20 +129,26 @@
         "title": "Lupo Image",
         "img": "1694698924_small.jpg",
         "date":"13/09/2012",
-        "position":{
-            "lat":43.609589, 
-            "lon":7.099944
-        }
+        "positions":
+        [
+            {
+                "lat":43.609589, 
+                "lon":7.099944
+            }
+        ]
     },
     {
         "id":9,
         "type":"place",
         "title": "Autoroute A8",
         "content": "Autoroute La Provencale",
-        "position":{
-            "lat":43.609589, 
-            "lon":7.099944
-        }
+        "positions":
+        [
+            {
+                "lat":43.609589, 
+                "lon":7.099944
+            }
+        ]
     },
     {
         "id":10,
@@ -139,10 +156,12 @@
         "title": "Avis de contravention",
         "content": "Exces de vitesse de 50km/h au dessus de la limite de vitesse.",
         "img": "000162644_600x400_c.jpg",
-        "position":{
-            "lat":43.609589, 
-            "lon":7.099944
-        }
+        "positions":[
+            {
+                "lat":43.609589, 
+                "lon":7.099944
+            }
+        ]
     },
     {
         "id": 11,
@@ -172,10 +191,13 @@
         "type":"place",
         "title": "Pizzeria de la mama",
         "content": "Miam miam les pizzas",
-        "position":{
-            "lat":43.598466, 
-            "lon":7.076026
-        }
+        "positions":
+        [
+            {
+                "lat":43.598466, 
+                "lon":7.076026
+            }
+        ]
     },
     {
         "id": 13,

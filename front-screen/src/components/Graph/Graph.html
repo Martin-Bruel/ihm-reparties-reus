@@ -8,12 +8,14 @@
                     v-touch:touchhold="holdCard(card.id, holdingCards, showMultipleElements)"
                     v-touch:end="releaseCard(card.id, holdingCards)"
                     v-bind:expandNode="expandNode"
+                    v-bind:removeCard="removeCard"
                     v-bind:id="card.id" 
                     v-bind:title="card.title" 
                     v-bind:subtitle="card.subtitle" 
                     v-bind:flag="card.flag"
                     v-bind:img="card.img"
                     v-bind:content="card.content"
+                    v-bind:positions="card.positions"
                     v-bind:type="card.type" />
             </Draggable>
         </span>
