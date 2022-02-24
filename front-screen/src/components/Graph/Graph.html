@@ -3,7 +3,8 @@
     <transition-group name="list" tag="p">
         <span v-for="(card, index) in cards" v-bind:key="card" class="list-card">
             <Draggable>
-                <Card 
+                <Card
+                    :ref="card.id" 
                     v-touch:touchhold="holdCard(card.id, holdingCards, showMultipleElements)"
                     v-touch:end="releaseCard(card.id, holdingCards)"
                     v-bind:expandNode="expandNode"

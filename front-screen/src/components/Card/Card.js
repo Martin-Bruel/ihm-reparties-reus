@@ -23,7 +23,10 @@ export default {
         url: `http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/image/`,
         counter: 0,
         isMenuActive: false,
-        hasPosition: false
+        hasPosition: false,
+        isHugeCard: false,
+        borderColor: "black",
+        borderWidth : "0.5px"
       }
     },
     methods: {
@@ -47,6 +50,21 @@ export default {
           this.desactivateMenu()
           this.expandAllLinks()
         },
+        setHugeCard(){
+          this.isHugeCard = true
+          setTimeout(() => {
+            this.isHugeCard = false
+          },175); 
+        },
+        setBorderColor(color){
+          console.log("COLOR")
+          this.borderColor = color
+          this.borderWidth = "3px"
+          setTimeout(() => {
+            this.borderColor = "black"
+            this.borderWidth = "0.5px"
+          },175); 
+        },
         removeCardNode(){
           this.desactivateMenu()
           this.removeCard(this.id)
@@ -65,6 +83,7 @@ export default {
         requestPosition(){
           this.desactivateMenu()
           axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/table/position/${Vue.prototype.$screenId}`, {lat: this.positions[0].lat, lon: this.positions[0].lon})
+          this.setHugeCard()
         }
     },
     mounted() {

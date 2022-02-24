@@ -27,6 +27,15 @@ export default {
     }, 50);
   },
   methods: {
+      makeHugeCard(id, color){
+        console.log(color)
+        if (color === null || color === undefined)
+          this.$refs[id][0].setHugeCard()
+        else {
+          this.$refs[id][0].setHugeCard()
+          this.$refs[id][0].setBorderColor(color)
+        }
+      },
       holdCard(id, holdingCards, showMultipleElements){
         return function() {
           if (holdingCards.length > 0){
@@ -34,7 +43,7 @@ export default {
             console.log("FETCH LINKS : ")
             axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/path/`+holdingCards[0]+'/'+id).then(response => {
               const res = response.data
-              showMultipleElements(res.cards, res.links)
+              showMultipleElements([holdingCards[0], id], res.cards, res.links)
             })
           }
           holdingCards.push(id)
@@ -65,7 +74,7 @@ export default {
         console.log("FETCH EXPAND NODES : "+id)
         axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/cards/links/`+id).then(response => {
           const res = response.data
-          this.showMultipleElements(res.cards, res.links)
+          this.showMultipleElements([id], res.cards, res.links)
         })
       },
       expandAllLinks(){
@@ -74,17 +83,24 @@ export default {
         let ids = this.cards.map((c)=>c.id)
         axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/links/`, ids).then(response => {
           const res = response.data
-          this.showMultipleElements([], res)
+          this.showMultipleElements(ids, [], res)
         })
       },
-      showMultipleElements(nodes, edges){
+      showMultipleElements(ids, nodes, edges){
+        let addedElements = 0
         nodes.map((n)=>{
-          if (this.cards.filter(item => item.id === n.id).length === 0)
+          if (this.cards.filter(item => item.id === n.id).length === 0){
             this.cards.push(n)
+            console.log("BINOEUD")
+            addedElements ++
+          }
         })
         setTimeout(()=>{
           edges.map((e)=>{
             if (!this.linkIds.includes(e.id)){
+              console.log("BIZARZ")
+              addedElements++
+              this.linkIds.push(e.id)
               this.edges.push({id1: e.id1, id2: e.id2, id: e.id})
               const card1Ref = document.getElementById("card"+e.id1)
               const card2Ref = document.getElementById("card"+e.id2)
@@ -101,7 +117,19 @@ export default {
               ));
             }
           })
-        }, 100)
+
+          let color = null
+
+        if (addedElements === 0){
+          if (nodes.length === 0 && edges.length === 0)
+            color = "red"
+          else color = "gold"
+        }
+        
+        ids.map((id)=>{
+          this.makeHugeCard(id, color)
+        })
+        }, 50)        
       },
       addCard () {
           this.cards.push(this.generateCardContent());

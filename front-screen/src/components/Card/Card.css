@@ -53,6 +53,19 @@
    -webkit-box-orient: vertical;
 }
 
+.hugeCard {
+    transform: scale(1.3);
+    height: auto;
+    max-height: none;
+}
+
+.hugeCard p {
+    display: -webkit-box;
+   -webkit-line-clamp: 30; /* number of lines to show */
+           line-clamp: 30; 
+   -webkit-box-orient: vertical;
+}
+
 h1.title {
     margin: .25rem;
     font-size: 0.75rem;

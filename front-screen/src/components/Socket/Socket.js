@@ -47,6 +47,7 @@ export default {
           console.log(res)
           if (this.cards.filter(item => item.id === res.id).length === 0)
             this.cards.push(res)
+          else this.$refs.graph.makeHugeCard(res.id, "gold")
         })
         this.time = event.data;
       }

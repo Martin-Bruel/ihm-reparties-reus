@@ -1,6 +1,6 @@
 <div style="display:flex; flex-direction:row; align-items: center; justify-content: flex-start;">
     <div v-bind:id="'card' + id.toString()" v-touch:tap="detectDoubleTap">
-        <div  v-touch:end="holdHandlerEnd" v-touch:start="holdHandler" v-bind:class="[{ cardActive: isActive }, 'card']">
+        <div  v-touch:end="holdHandlerEnd" :style="{'border-color': borderColor, 'border-width': borderWidth}" v-touch:start="holdHandler" v-bind:class="[{ cardActive: isActive }, { hugeCard: isHugeCard }, 'card']">
             <img v-if="img" v-bind:class="type === 'image' || type === 'image' ? 'bigPicture' : 'picture'" :alt="title" :src="url+img">
             <h1 class="title">{{ title }}</h1>
             <h3 v-if="subtitle" class="subtitle"><img v-if="flag" class="flag" :src="url+flag">{{ subtitle }}</h3>
