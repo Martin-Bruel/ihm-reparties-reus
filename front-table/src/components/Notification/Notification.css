@@ -1,5 +1,6 @@
 .modal-overlay {
   position: fixed;
+  z-index: 1000;
   top: 0;
   bottom: 0;
   left: 0;
@@ -15,12 +16,12 @@
   background-color: white;
   height: 200px;
   width: 500px;
-  margin-top: 25%;
+  margin-top: 15%;
   padding: 60px 0;
   border-radius: 20px;
 }
 .close {
-  margin: 25% 0 0 16px;
+  margin: 15% 0 0 16px;
   cursor: pointer;
 }
 .close-img {
