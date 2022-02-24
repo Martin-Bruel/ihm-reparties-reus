@@ -1,6 +1,5 @@
 <div id="graph-container">
     <button class="hidden" id="printAddButton" v-on:click="addCard">Ajouter</button>
-
     <transition-group name="list" tag="p">
         <span v-for="(card, index) in cards" v-bind:key="card" class="list-card">
             <Draggable>
