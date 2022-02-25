@@ -95,6 +95,7 @@ html, body, #app {
   margin: 0;
   padding: 0;
   background-color: #181a1b;
+  overflow: clip;
 }
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
