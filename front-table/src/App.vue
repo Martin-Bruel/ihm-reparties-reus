@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Map :positionNotification="positionNotification"  @on-move="onMove"/>
+    <Map ref="map" @on-move="onMove" :positionNotification="positionNotification"/>
     <Notification v-if="notification == true" @accept-modal="acceptModal" @close-modal="closeModal"/>
   </div>
 </template>
@@ -19,7 +19,6 @@ export default {
             url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
       attribution:
         '&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-      zoom: 15,
       center: [51.505, -0.159],
       markerLatLng: [51.504, -0.159],
       notification: false,
@@ -38,6 +37,7 @@ export default {
     },
     acceptModal(){
       this.positionNotification = latLng(this.result.message.lat,this.result.message.lon)
+      this.$refs.map.updateCenterAndZoom(latLng(this.result.message.lat,this.result.message.lon), 15)
       this.notification = false
     },
     onMove(cards, id, event){

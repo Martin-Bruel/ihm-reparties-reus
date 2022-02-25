@@ -19,16 +19,14 @@ export default {
     },
     data() {
         return {
-            zoom: 12,
             cards: [],
             center: latLng(43.62806792078592, 7.082102807121494),
+            zoom: 12,
             url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
             attribution:
                 '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
             withPopup: latLng(47.41322, -1.219482),
             withTooltip: latLng(47.41422, -1.250482),
-            currentZoom: 11.5,
-            currentCenter: latLng(47.41322, -1.219482),
             showParagraph: false,
             mapOptions: {
                 doubleClickZoom: false
@@ -57,10 +55,14 @@ export default {
             } 
         },
         zoomUpdate(zoom) {
-            this.currentZoom = zoom;
+            this.zoom = zoom;
         },
         centerUpdate(center) {
-            this.currentCenter = center;
+            this.center = center;
+        },
+        updateCenterAndZoom(center, zoom){
+            this.zoom = zoom;
+            this.center = center;
         },
         showLongText() {
             this.showParagraph = !this.showParagraph;
@@ -160,7 +162,6 @@ export default {
         // if(){
             
         // }
-        console.log("positionNotification : ",this.positionNotification)
     },
     mounted(){
         axios.get(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/positions`).then(response => {
