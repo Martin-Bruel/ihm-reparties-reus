@@ -1,16 +1,5 @@
 [
     {
-        "id":0,
-        "title": "Organisateur",
-        "content": "",
-        "id1": 5,
-        "id2": 1,
-        "position": {
-            "lat": 43.72806792078592,
-            "lon": 7.182102807121494
-        }
-    },
-    {
         "id":1,
         "title": "Photo",
         "content": "",
@@ -140,17 +129,6 @@
         "position":{
             "lat": 43.579670,
             "lon": 7.053899
-        }
-    },
-    {
-        "id":12,
-        "title": "Vendeuse",
-        "content": "",
-        "id1": 5,
-        "id2": 0,
-        "position": {
-            "lat": 43.72806792078592,
-            "lon": 7.182102807121494
         }
     },
     {

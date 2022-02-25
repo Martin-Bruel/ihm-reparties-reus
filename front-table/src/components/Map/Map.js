@@ -38,6 +38,8 @@ export default {
             detailedCards: [],
             showShadow: false,
             shadowBigNav: null,
+            currentZoom: null,
+            currentCenter: null,
             positionsSorts: PositionsSorts
         };
     },
@@ -55,13 +57,9 @@ export default {
             } 
         },
         zoomUpdate(zoom) {
-            this.zoom = zoom;
+            this.currentZoom = zoom;
         },
         centerUpdate(center) {
-            this.center = center;
-        },
-        updateCenterAndZoom(center, zoom){
-            this.zoom = zoom;
             this.center = center;
         },
         showLongText() {

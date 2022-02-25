@@ -85,19 +85,6 @@
         ]
     },
     {
-        "id":5,
-        "type": "event",
-        "title": "Vente de produits",
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut ut nibh sagittis, vestibulum elit vitae, venenatis justo. Duis vel leo a risus tincidunt tincidunt eu a orci. Pellentesque sagittis maximus nisi a euismod. Phasellus nec velit dui",
-        "date":"14/02/2022",
-        "positions": [
-                {
-                "lat": 43.615828,
-                "lon": 7.072713
-            }
-        ]
-    },
-    {
         "id":6,
         "type": "image",
         "title": "Pablo Escrobar Image 1",

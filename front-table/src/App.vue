@@ -37,7 +37,7 @@ export default {
     },
     acceptModal(){
       this.positionNotification = latLng(this.result.message.lat,this.result.message.lon)
-      this.$refs.map.updateCenterAndZoom(latLng(this.result.message.lat,this.result.message.lon), 15)
+      this.$refs.map.centerUpdate(latLng(this.result.message.lat,this.result.message.lon))
       this.notification = false
     },
     onMove(cards, id, event){
