@@ -26,7 +26,10 @@ export default {
         hasPosition: false,
         isHugeCard: false,
         borderColor: "black",
-        borderWidth : "0.5px"
+        borderWidth : "0.5px",
+        zoomed: false,
+        width: "100%",
+        height: "100%"
       }
     },
     methods: {
@@ -89,6 +92,12 @@ export default {
     mounted() {
       if (this.positions.length > 0)
         this.hasPosition = true
+    },
+    updated() {
+      if (this.zoomed && this.width === "100%"){
+        this.width = 0
+        this.height = 0
+      }
     }
   }
   

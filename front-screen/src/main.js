@@ -6,10 +6,12 @@ import VueRouter from 'vue-router'
 import Vue2TouchEvents from 'vue2-touch-events'
 import router from './router'
 import { DraggablePlugin } from '@braks/revue-draggable';
+import VueZoomer from 'vue-zoomer'
 
 Vue.use(DraggablePlugin)
 Vue.use(VueRouter)
 Vue.use(Vue2TouchEvents)
+Vue.use(VueZoomer)
 
 
 // Vue.use(VueNativeSock, 'ws://localhost:9090')

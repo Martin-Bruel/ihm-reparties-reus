@@ -18,6 +18,7 @@
     "vue": "^2.6.11",
     "vue-native-websocket": "^2.0.15",
     "vue-router": "^3.5.3",
+    "vue-zoomer": "^0.3.9",
     "vue2-touch-events": "^3.2.2"
   },
   "devDependencies": {
