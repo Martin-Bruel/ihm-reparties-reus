@@ -1,5 +1,5 @@
-<div>
-  <div v-if="!screenInitialized">
+<div style="width: 100%; height: 100%;">
+  <div v-if="!screenInitialized" style="width: 100%; position: absolute;">
     <h1>Ecran {{screenId}}</h1>
     <h2>{{time}}</h2>
     <button v-on:click="init(1)">
@@ -14,5 +14,5 @@
   </div>
   <!-- <input v-model="message" placeholder="message" />
   <button elevation="2" v-on:click="submit(0)">Send message to table</button> -->
-  <Graph :cards="this.cards" ref="graph"/>
+  <Graph v-bind:cards="this.cards" :setCards="setCards" ref="graph"/>
 </div>

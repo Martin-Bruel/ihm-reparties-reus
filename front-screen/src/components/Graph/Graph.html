@@ -1,4 +1,4 @@
-<div id="graph-container">
+<div id="graph-container" v-on:click="detectDoubleTap">
     <button class="hidden" id="printAddButton" v-on:click="addCard">Ajouter</button>
     <transition-group name="list" tag="p">
         <span v-for="(card, index) in cards" v-bind:key="card" class="list-card">
@@ -8,7 +8,6 @@
                 v-touch:end="releaseCard(card.id, holdingCards)"
                 v-bind:expandNode="expandNode"
                 v-bind:removeCard="removeCard"
-                v-bind:expandAllLinks="expandAllLinks"
                 v-bind:id="card.id" 
                 v-bind:title="card.title" 
                 v-bind:subtitle="card.subtitle" 
@@ -19,4 +18,15 @@
                 v-bind:type="card.type" />
         </span>
     </transition-group>
+    <div v-bind:class="[{ menuActive: isMenuActive }, 'menu']" :style="{ 'left': menuLeft, 'top': menuTop }">
+        <span v-on:click="expandAllLinks" style="display: flex; flex-direction: row; align-items: center;">
+            <img src="../../assets/multi-expand.svg" width="19.5px"></img>
+            <h3 class="menu-title">Afficher tous les liens</h3>
+        </span>
+        <span class="separator"></span>
+        <span v-on:click="removeGraph" style="display: flex; flex-direction: row; align-items: center;">
+            <img src="../../assets/trash.svg" width="19.5px"></img>
+            <h3 class="menu-title">Supprimer le graphe</h3>
+        </span>
+    </div>
 </div>

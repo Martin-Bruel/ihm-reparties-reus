@@ -5,7 +5,8 @@ import axios from 'axios';
 export default {
   name: 'Graph',
   props : {
-    cards: null
+    cards: null,
+    setCards: Function
   },
   data () {
       return {
@@ -13,7 +14,11 @@ export default {
         linkIds: [],
         lines: [],
         holdingCards: [],
-        edges: []
+        edges: [],
+        counter: 0,
+        isMenuActive: false,
+        menuLeft: 0,
+        menuTop: 0
       }   
   },
   mounted() {
@@ -59,6 +64,7 @@ export default {
       },
       removeCard(id){
         this.cards = this.cards.filter(item => item.id !== id)
+        this.setCards(this.cards)
         this.edges.map((e, i)=> {
           if (e.id1 === id || e.id2 === id){
             this.lines[i].remove()
@@ -66,6 +72,19 @@ export default {
             this.edges[i] = null
             this.linkIds = this.linkIds.filter(linkId => linkId !== e.id)
           }
+        })
+        this.lines = this.lines.filter((l)=> l !== null)
+        this.edges = this.edges.filter((e)=> e !== null)
+      },
+      removeGraph(){
+        this.isMenuActive = false
+        this.cards = []
+        this.setCards([])
+        this.edges.map((e, i)=> {
+            this.lines[i].remove()
+            this.lines[i] = null
+            this.edges[i] = null
+            this.linkIds = this.linkIds.filter(linkId => linkId !== e.id)
         })
         this.lines = this.lines.filter((l)=> l !== null)
         this.edges = this.edges.filter((e)=> e !== null)
@@ -78,6 +97,7 @@ export default {
         })
       },
       expandAllLinks(){
+        this.isMenuActive = false
         console.log("FETCH EXPAND ALL LINKS : ")
         //Create array of card Ids
         let ids = this.cards.map((c)=>c.id)
@@ -91,6 +111,7 @@ export default {
         nodes.map((n)=>{
           if (this.cards.filter(item => item.id === n.id).length === 0){
             this.cards.push(n)
+            this.setCards(this.cards)
             console.log("BINOEUD")
             addedElements ++
           }
@@ -230,7 +251,27 @@ export default {
           content : content[Math.floor(Math.random()*content.length)],
           cardOrLink: 'link'
         }
-      }
+      },
+      showMenu(event){
+        console.log(event)
+        console.log(event.x)
+        console.log(event.y)
+      },
+      detectDoubleTap(event) {
+        console.log(event)
+        if(this.counter === 1) {
+          this.counter = 0
+          this.isMenuActive = !this.isMenuActive
+          this.menuLeft = event.x.toString()+'px'
+          this.menuTop = event.y.toString()+'px'
+          console.log(this.menuLeft)
+        }else{
+          this.counter++
+          setTimeout(() => {
+            this.counter = 0
+          },300); 
+        }
+    }
   },
   components: {
     Card

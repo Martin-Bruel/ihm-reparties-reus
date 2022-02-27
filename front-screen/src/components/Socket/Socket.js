@@ -12,7 +12,9 @@ export default {
       console.log(this.connection);
       this.connection.send(message);
     },
-
+    setCards(cardsArray){
+      this.cards = cardsArray
+    },
     submit(id) {
       const json = {
         id: id,

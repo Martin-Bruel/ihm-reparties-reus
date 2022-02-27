@@ -29,7 +29,6 @@ html, body, #app {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: whitesmoke;
-  margin-top: 60px;
 }
 
 body {
