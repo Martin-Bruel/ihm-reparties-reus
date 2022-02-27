@@ -2,23 +2,21 @@
     <button class="hidden" id="printAddButton" v-on:click="addCard">Ajouter</button>
     <transition-group name="list" tag="p">
         <span v-for="(card, index) in cards" v-bind:key="card" class="list-card">
-            <Draggable>
-                <Card
-                    :ref="card.id" 
-                    v-touch:touchhold="holdCard(card.id, holdingCards, showMultipleElements)"
-                    v-touch:end="releaseCard(card.id, holdingCards)"
-                    v-bind:expandNode="expandNode"
-                    v-bind:removeCard="removeCard"
-                    v-bind:expandAllLinks="expandAllLinks"
-                    v-bind:id="card.id" 
-                    v-bind:title="card.title" 
-                    v-bind:subtitle="card.subtitle" 
-                    v-bind:flag="card.flag"
-                    v-bind:img="card.img"
-                    v-bind:content="card.content"
-                    v-bind:positions="card.positions"
-                    v-bind:type="card.type" />
-            </Draggable>
+            <Card
+                :ref="card.id" 
+                v-touch:touchhold="holdCard(card.id, holdingCards, showMultipleElements)"
+                v-touch:end="releaseCard(card.id, holdingCards)"
+                v-bind:expandNode="expandNode"
+                v-bind:removeCard="removeCard"
+                v-bind:expandAllLinks="expandAllLinks"
+                v-bind:id="card.id" 
+                v-bind:title="card.title" 
+                v-bind:subtitle="card.subtitle" 
+                v-bind:flag="card.flag"
+                v-bind:img="card.img"
+                v-bind:content="card.content"
+                v-bind:positions="card.positions"
+                v-bind:type="card.type" />
         </span>
     </transition-group>
 </div>

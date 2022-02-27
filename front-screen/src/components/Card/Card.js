@@ -28,8 +28,7 @@ export default {
         borderColor: "black",
         borderWidth : "0.5px",
         zoomed: false,
-        width: "100%",
-        height: "100%"
+        disableZoom : false
       }
     },
     methods: {
@@ -57,7 +56,7 @@ export default {
           this.isHugeCard = true
           setTimeout(() => {
             this.isHugeCard = false
-          },175); 
+          },300); 
         },
         setBorderColor(color){
           console.log("COLOR")
@@ -66,7 +65,7 @@ export default {
           setTimeout(() => {
             this.borderColor = "black"
             this.borderWidth = "0.5px"
-          },175); 
+          },300); 
         },
         removeCardNode(){
           this.desactivateMenu()
@@ -75,7 +74,7 @@ export default {
         detectDoubleTap() {
             if(this.counter === 1) {
               this.counter = 0
-              this.activateMenu();
+              this.isMenuActive = !this.isMenuActive
             }else{
               this.counter++
               setTimeout(() => {
@@ -87,17 +86,17 @@ export default {
           this.desactivateMenu()
           axios.post(`http://${process.env.VUE_APP_BACK_IP}:8080/reus-api/table/position/${Vue.prototype.$screenId}`, {lat: this.positions[0].lat, lon: this.positions[0].lon})
           this.setHugeCard()
+        },
+        startDrag(){
+          this.disableZoom = true
+        },
+        stopDrag(){
+          this.disableZoom = false
         }
     },
     mounted() {
       if (this.positions.length > 0)
         this.hasPosition = true
-    },
-    updated() {
-      if (this.zoomed && this.width === "100%"){
-        this.width = 0
-        this.height = 0
-      }
     }
   }
   

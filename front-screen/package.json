@@ -15,8 +15,10 @@
     "cache-loader": "^4.1.0",
     "core-js": "^3.6.5",
     "leader-line-vue": "^2.1.1",
+    "uninstall": "^0.0.0",
     "vue": "^2.6.11",
     "vue-native-websocket": "^2.0.15",
+    "vue-pinch-zoom": "^1.0.1",
     "vue-router": "^3.5.3",
     "vue-zoomer": "^0.3.9",
     "vue2-touch-events": "^3.2.2"

@@ -6,13 +6,12 @@ import VueRouter from 'vue-router'
 import Vue2TouchEvents from 'vue2-touch-events'
 import router from './router'
 import { DraggablePlugin } from '@braks/revue-draggable';
-import VueZoomer from 'vue-zoomer'
+import PinchZoom from 'vue-pinch-zoom';
 
 Vue.use(DraggablePlugin)
 Vue.use(VueRouter)
 Vue.use(Vue2TouchEvents)
-Vue.use(VueZoomer)
-
+Vue.component('pinch-zoom', PinchZoom);
 
 // Vue.use(VueNativeSock, 'ws://localhost:9090')
 Vue.config.productionTip = false;
