@@ -27,7 +27,8 @@ export default {
         borderColor: "black",
         borderWidth : "0.5px",
         zoomed: false,
-        disableZoom : false
+        disableZoom : false,
+        pinchZoom : Vue.prototype.$screenId === 2
       }
     },
     methods: {

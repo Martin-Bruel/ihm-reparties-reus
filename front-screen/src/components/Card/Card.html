@@ -1,5 +1,5 @@
 <Draggable @start="startDrag" @stop="stopDrag">
-    <pinch-zoom ref="zoomer" disableZoomControl="disable" :style="{'background-color': 'none', 'pointer-events': disableZoom ? 'none' : 'inherit'}" :doubleTap="false" :autoHeight="true" :disabled="disableZoom" :disablePan="true" overflow="visible">
+    <pinch-zoom v-if="pinchZoom" ref="zoomer" disableZoomControl="disable" :style="{'background-color': 'none', 'pointer-events': disableZoom ? 'none' : 'inherit'}" :doubleTap="false" :autoHeight="true" :disabled="disableZoom" :disablePan="true" overflow="visible">
         <div style="display:flex; flex-direction:row; align-items: center; justify-content: flex-start;">
             
             <div v-bind:id="'card' + id.toString()" v-touch:tap="detectDoubleTap">
@@ -33,4 +33,36 @@
             </div>
         </div>
     </pinch-zoom>
+    <div v-if="!pinchZoom" style="display:flex; flex-direction:row; align-items: center; justify-content: flex-start;">
+            
+        <div v-bind:id="'card' + id.toString()" v-touch:tap="detectDoubleTap">
+            <div  v-touch:end="holdHandlerEnd" :style="{'border-color': borderColor, 'border-width': borderWidth}" v-touch:start="holdHandler" v-bind:class="[{ cardActive: isActive }, { hugeCard: isHugeCard }, 'card']">
+                <img v-if="img" v-bind:class="type === 'image' || type === 'image' ? 'bigPicture' : 'picture'" :alt="title" :src="url+img">
+                <h1 class="title">{{ title }}</h1>
+                <h3 v-if="subtitle" class="subtitle"><img v-if="flag" class="flag" :src="url+flag">{{ subtitle }}</h3>
+                <p class="content">{{ content }}</p>
+            </div>
+        </div>
+        <div v-bind:class="[{ menuActive: isMenuActive }, 'menu']">
+            <span v-touch:tap="expandCardNode" style="display: flex; flex-direction: row; align-items: center;">
+                <img src="../../assets/simple-expand.svg" width="19.5px"></img>
+                <h3 class="menu-title">Étendre les liens</h3>
+            </span>
+            <span class="separator"></span>
+            <span v-if="hasPosition" v-touch:tap="requestPosition" style="display: flex; flex-direction: row; align-items: center;">
+                <img src="../../assets/position.png" width="19.5px"></img>
+                <h3 class="menu-title">Demander position</h3>
+            </span>
+            <span v-if="hasPosition" class="separator"></span>
+            <span v-touch:tap="removeCardNode" style="display: flex; flex-direction: row; align-items: center;">
+                <img src="../../assets/trash.svg" width="19.5px"></img>
+                <h3 class="menu-title">Supprimer carte</h3>
+            </span>
+            <span class="separator"></span>
+            <span v-touch:tap="desactivateMenu" style="display: flex; flex-direction: row; align-items: center;">
+                <img src="../../assets/close-icon.svg" width="19.5px"></img>
+                <h3 class="menu-title">Fermer menu</h3>
+            </span>
+        </div>
+    </div>
 </Draggable>
